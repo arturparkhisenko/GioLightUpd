@@ -68,63 +68,66 @@ public class GioLightUpdActivity extends Activity {
         }
     }
 
-	private class DownloadFile extends AsyncTask<String, String, String>{
-		
+	private class DownloadFile extends AsyncTask<String, String, String> {
+
 		@Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            showDialog(DIALOG_DOWNLOAD_PROGRESS);
-        }
+		protected void onPreExecute() {
+			super.onPreExecute();
+			showDialog(DIALOG_DOWNLOAD_PROGRESS);
+		}
 
-	    @Override
-	    protected String doInBackground(String... url) {
-	        int count;
-	        try {
-	            URL url1 = new URL(url[0]);
-	            URLConnection conexion = url1.openConnection();
-	            conexion.connect();
-	            // this will be useful so that you can show a typical 0-100% progress bar
-	            int lenghtOfFile = conexion.getContentLength();
-	            // download the file
-	            InputStream input = new BufferedInputStream(url1.openStream());
-	            OutputStream output = new FileOutputStream("/sdcard/Light/1.zip");
+		@Override
+		protected String doInBackground(String... url) {
+			int count;
+			try {
+				URL url1 = new URL(url[0]);
+				URLConnection conexion = url1.openConnection();
+				conexion.connect();
+				// this will be useful so that you can show a typical 0-100%
+				// progress bar
+				int lenghtOfFile = conexion.getContentLength();
+				// download the file
+				InputStream input = new BufferedInputStream(url1.openStream());
+				OutputStream output = new FileOutputStream(
+						"/sdcard/Light/1.zip");
 
-	            byte data[] = new byte[1024];
+				byte data[] = new byte[1024];
 
-	            long total = 0;
+				long total = 0;
 
-	            while ((count = input.read(data)) != -1) {
-	                total += count;
-	                // publishing the progress
-	                publishProgress(""+(int)((total*100)/lenghtOfFile));
-	                output.write(data, 0, count);
-	            }
+				while ((count = input.read(data)) != -1) {
+					total += count;
+					// publishing the progress
+					publishProgress("" + (int) ((total * 100) / lenghtOfFile));
+					output.write(data, 0, count);
+				}
 
-	            output.flush();
-	            output.close();
-	            input.close();
-	        } catch (Exception e) {}
-	        return null;
-	    }
-	    protected void onProgressUpdate(String... progress) {
-            Log.d("ANDRO_ASYNC",progress[0]);
-            mProgressDialog.setProgress(Integer.parseInt(progress[0]));
-       }
+				output.flush();
+				output.close();
+				input.close();
+			} catch (Exception e) {
+			}
+			return null;
+		}
 
-       @Override
-       protected void onPostExecute(String unused) {
-           dismissDialog(DIALOG_DOWNLOAD_PROGRESS);
-       }
+		protected void onProgressUpdate(String... progress) {
+			Log.d("ANDRO_ASYNC", progress[0]);
+			mProgressDialog.setProgress(Integer.parseInt(progress[0]));
+		}
+
+		@Override
+		protected void onPostExecute(String unused) {
+			dismissDialog(DIALOG_DOWNLOAD_PROGRESS);
+		}
 
 	}
-   
+
 	public boolean button5_Click(View v) {
 		if (isInternetOn()) {
-			String fntd = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
-			String cleanstr1 = fntd.substring(0, 2);
-			fnt = "GioLight" + cleanstr1 + ".zip";
-
 			String furlt = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
+			String cleanstr1 = furlt.substring(38, 70);
+			fnt = cleanstr1;
+
 			DownloadFile downloadFile = new DownloadFile();
 			downloadFile.execute(furlt);
 
@@ -143,11 +146,10 @@ public class GioLightUpdActivity extends Activity {
 
 	public boolean button6_Click(View v) {
 		if (isInternetOn()) {
-			String fnd = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
-			String cleanstr2 = fnd.substring(0, 2);
-			fn = "GioLight" + cleanstr2 + ".zip";
-
 			String furl = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
+			String cleanstr2 = furl.substring(38, 70);
+			fn = cleanstr2;
+
 			DownloadFile downloadFile = new DownloadFile();
 			downloadFile.execute(furl);
 
