@@ -48,6 +48,7 @@ public class GioLightUpdActivity extends Activity {
 		setContentView(R.layout.main);
 		TextView tv10 = (TextView) findViewById(R.id.textView10);
 
+// Here we go...
 		String cleanstr3 = "";
 		try {
 		 Process ifc = Runtime.getRuntime().exec("getprop ro.light.version");
@@ -56,6 +57,7 @@ public class GioLightUpdActivity extends Activity {
 		 ifc.destroy();
 		} catch (java.io.IOException e) {
 		}
+// Now we have version number)
 		
 		glv = "ม่๋ไ - " + cleanstr3 + "\n";
 		tv10.setText(glv);
