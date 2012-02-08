@@ -1,6 +1,7 @@
 package ikeagold.zimniy.giolight;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -46,7 +47,16 @@ public class GioLightUpdActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		TextView tv10 = (TextView) findViewById(R.id.textView10);
-		String cleanstr3 = android.os.Build.DISPLAY.substring(6, 8);
+
+		String cleanstr3 = "";
+		try {
+		 Process ifc = Runtime.getRuntime().exec("getprop ro.light.version");
+		 BufferedReader bis = new BufferedReader(new InputStreamReader(ifc.getInputStream()));
+		 cleanstr3 = bis.readLine();
+		 ifc.destroy();
+		} catch (java.io.IOException e) {
+		}
+		
 		glv = "ม่๋ไ - " + cleanstr3 + "\n";
 		tv10.setText(glv);
 	}
