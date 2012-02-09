@@ -87,12 +87,6 @@ public class GioLightUpdActivity extends Activity {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		CheckboxPreference = prefs.getBoolean("checkboxPref", false);
-
-		if (CheckboxPreference = true) {
-			Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
-		} else {
-			Toast.makeText(this, "0", Toast.LENGTH_SHORT).show();
-		}
 	}
 
 	// Download buttons ZONE
@@ -207,7 +201,9 @@ public class GioLightUpdActivity extends Activity {
 	// Check new
 	public boolean button4_Click(View v) {
 		if (isInternetOn()) {
-			if (CheckboxPreference = false) {
+
+// Goddammit, bro! Why u use "=" instead of "==" in "if" operator????
+			if (CheckboxPreference == false) {
 				String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
 				TextView tv1 = (TextView) findViewById(R.id.textView1);
 				tv1.setText("Стабильная версия: " + str1);
