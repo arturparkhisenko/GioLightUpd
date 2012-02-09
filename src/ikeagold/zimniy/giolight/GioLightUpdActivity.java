@@ -78,26 +78,22 @@ public class GioLightUpdActivity extends Activity {
 		Button bt6 = (Button) findViewById(R.id.button6);
 		bt6.setVisibility(View.GONE);
 		
-		onResume();
 	}
 
 	// Get Preferences
-	@Override 
-	public void onResume() 
-	{
-	    super.onResume();
-			SharedPreferences prefs = PreferenceManager
-					.getDefaultSharedPreferences(this);
-			CheckboxPreference = prefs.getBoolean("checkboxPref", false);
-	}
-	
-	/**
-	private void getPrefs() {
+	@Override
+	public void onResume() {
+		super.onResume();
 		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(getBaseContext());
+				.getDefaultSharedPreferences(this);
 		CheckboxPreference = prefs.getBoolean("checkboxPref", false);
+
+		if (CheckboxPreference = true) {
+			Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(this, "0", Toast.LENGTH_SHORT).show();
+		}
 	}
-	*/
 
 	// Download buttons ZONE
 	@Override
@@ -163,6 +159,7 @@ public class GioLightUpdActivity extends Activity {
 
 	}
 
+	// Download button
 	public boolean button5_Click(View v) {
 		if (isInternetOn()) {
 			String furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
@@ -210,8 +207,7 @@ public class GioLightUpdActivity extends Activity {
 	// Check new
 	public boolean button4_Click(View v) {
 		if (isInternetOn()) {
-			onResume();
-			if (CheckboxPreference = true) {
+			if (CheckboxPreference = false) {
 				String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
 				TextView tv1 = (TextView) findViewById(R.id.textView1);
 				tv1.setText("Стабильная версия: " + str1);
@@ -357,9 +353,9 @@ public class GioLightUpdActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case 1:
-			Intent settingsActivity = new Intent(getBaseContext(),
-					Preferences.class);
-			startActivity(settingsActivity);
+			Intent Prefs = new Intent(this,
+					Prefs.class);
+			startActivity(Prefs);
 			break;
 		case 2:
 			Intent alert = new Intent(this, Alert.class);
