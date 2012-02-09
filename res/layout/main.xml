@@ -9,42 +9,12 @@
     android:paddingRight="15dip"
     android:paddingTop="5dip" >
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <TextView
+        android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            android:onClick="button1_Click"
-            android:text="@string/alert_label"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            android:onClick="button2_Click"
-            android:text="@string/install_label"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            android:onClick="button3_Click"
-            android:text="@string/info_label"
-            android:textStyle="bold" />
-    </LinearLayout>
+        android:text="@string/note"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/button4"
@@ -56,85 +26,34 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/note"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/glv_version" />
+        android:text="" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/test_label"
+        android:text="@string/label"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_margin="1dp"
+        android:onClick="button5_Click"
+        android:text="@string/download"
+        android:layout_alignParentBottom = "true" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:autoLink="web"
-            android:text="@string/test_version" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            android:onClick="button5_Click"
-            android:text="@string/download" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/stable_label"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:autoLink="web"
-            android:text="@string/stable_version" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            android:onClick="button6_Click"
-            android:text="@string/download" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoLink="web"
-        android:text="@string/cl_link" />
+        android:layout_margin="1dp"
+        android:onClick="button6_Click"
+        android:text="@string/download"
+        android:layout_alignParentBottom = "true" />
 
 </LinearLayout>

@@ -11,18 +11,17 @@
     <string name="alert_label">Важно</string>
     <string name="install_label">Установка</string>
     <string name="info_label">Описание</string>
-    <string name="test_label">Тестовая версия:</string>
-    <string name="stable_label">Стабильная версия:</string>
-    <string name="cl_link">Сайт: http://goo.gl/qWS5m</string>
-    <string name="glv_version">Билд - \n</string>
-    <string name="test_version">Билд - </string>
-    <string name="stable_version">Билд - </string>
-    <string name="note">Установленная версия:</string>
+    <string name="label"></string>
+    <string name="note">Установленная версия:\n</string>
     <string name="download">Скачать</string>
+    <string name="pref_label">Настройки</string>
+    <string name="pref_title">Общие</string>
+    <string name="pref_test_title">Тестовые версии</string>
     <string name="alert_text">Важно:\n\n
 		- Без CWM (минимально 2.3 Android) данную прошивку использовать нельзя.\n\n
-		- Файловая система по-умолчанию ext4 - переход на другую прошивку возможен только после многофайловой прошивки через Odin.
-		- *zip архивы прошивок размером ~95мб.</string>
+		- Файловая система по-умолчанию ext4 - переход на другую прошивку возможен только после многофайловой прошивки через Odin.\n\n
+		- *zip архивы прошивок размером ~95мб.\n\n\n
+		Сайт: http://goo.gl/qWS5m	</string>
     <string name="install_text">Порядок установки:\n\n
 		Для корректной установки и работы ROM необходимо скачать и прошить CWM, либо - поставить ROM 2 раза подряд - если у Вас стоковая прошивка без CWM (когда установщик в первый раз прошьёт часть файлов - boot.img и recovery.img и ругнётся на невозможность дальнейшей установки - ещё раз перезагрузиться в рекавери и повторить процесс)\n\n
 		Снимаем полный бэкап в CWM, чтобы (если вдруг захочется) откатиться обратно\n\n
@@ -30,7 +29,7 @@
 		Тем, кто хочет установить ROM впервые, необходимо прошить baseband для нужной версии Android\n\n
 		Закидываем ROM на флешку\n\n
 		Выбираем "install zip from sdcard", находим и устанавливаем ROM\n\n
-		ROM обрабатывает найденные на карте в папке gio4pda пакеты, и перезагружается для их установки (при отсутствии пакетов - перезагрузитесь вручную).</string>
+		ROM обрабатывает найденные на карте в папке gio4pda пакеты, и перезагружается для их установки (при отсутствии пакетов - перезагрузитесь вручную).	</string>
     <string name="info_text">Особенности данной прошивки:\n\n
 		BOOT:\n\n
 		Разгон (122-1035 МГц) - 787 по-умолчанию\n
@@ -64,6 +63,6 @@
 		Загрузки\n
 		CWM\n
 		SIM ToolKit (зависит от оператора)\n
-		Superuser\n</string>
+		Superuser\n	</string>
 
 </resources>

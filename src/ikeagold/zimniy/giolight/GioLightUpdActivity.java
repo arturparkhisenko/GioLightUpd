@@ -1,6 +1,7 @@
 package ikeagold.zimniy.giolight;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,47 +19,93 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class GioLightUpdActivity extends Activity {
-	//public vars
-    public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
-    private ProgressDialog mProgressDialog;
-    public String fn;
-    public String fnt;
-    public String glv;
+	
+	// public var's
+	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
+	private ProgressDialog mProgressDialog;
+	public String fn;
+	public String fnt;
+	public String glv;
+	public boolean CheckboxPreference;
 
-    
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		TextView tv10 = (TextView) findViewById(R.id.textView10);
-		String cleanstr3 = android.os.Build.DISPLAY.substring(6, 8);
-		glv = "Билд - " + cleanstr3 + "\n";
-		tv10.setText(glv);
+
+		// get version installed
+		TextView tv9 = (TextView) findViewById(R.id.textView9);
+		String cleanstr3 = "";
+
+		try {
+			Process ifc = Runtime.getRuntime().exec("getprop ro.light.version");
+			BufferedReader bis = new BufferedReader(new InputStreamReader(
+					ifc.getInputStream()));
+			cleanstr3 = bis.readLine();
+			ifc.destroy();
+		} catch (java.io.IOException e) {
+		}
+		glv = "Установленная версия: " + cleanstr3 + "\n";
+		tv9.setText(glv);
+
+		// off buttons
+		Button button5 = (Button) findViewById(R.id.button5);
+		button5.setEnabled(false);
+		Button button6 = (Button) findViewById(R.id.button6);
+		button6.setEnabled(false);
+
+		// Hide buttons
+		Button bt5 = (Button) findViewById(R.id.button5);
+		bt5.setVisibility(View.GONE);
+		Button bt6 = (Button) findViewById(R.id.button6);
+		bt6.setVisibility(View.GONE);
+		
+		onResume();
+	}
+
+	// Get Preferences
+	@Override 
+	public void onResume() 
+	{
+	    super.onResume();
+			SharedPreferences prefs = PreferenceManager
+					.getDefaultSharedPreferences(this);
+			CheckboxPreference = prefs.getBoolean("checkboxPref", false);
 	}
 	
-	//download buttons ZONE
-	
+	/**
+	private void getPrefs() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(getBaseContext());
+		CheckboxPreference = prefs.getBoolean("checkboxPref", false);
+	}
+	*/
+
+	// Download buttons ZONE
 	@Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case DIALOG_DOWNLOAD_PROGRESS:
                 mProgressDialog = new ProgressDialog(this);
-                mProgressDialog.setMessage("Загружаю в /sd-card/Light/...");
+                mProgressDialog.setMessage("Качает в /sd-card/Light/...");
                 mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
@@ -83,25 +130,19 @@ public class GioLightUpdActivity extends Activity {
 				URL url1 = new URL(url[0]);
 				URLConnection conexion = url1.openConnection();
 				conexion.connect();
-				// this will be useful so that you can show a typical 0-100%
-				// progress bar
+				// progress bar 0-100%
 				int lenghtOfFile = conexion.getContentLength();
 				// download the file
 				InputStream input = new BufferedInputStream(url1.openStream());
 				OutputStream output = new FileOutputStream(
 						"/sdcard/Light/1.zip");
-
 				byte data[] = new byte[1024];
-
 				long total = 0;
-
 				while ((count = input.read(data)) != -1) {
 					total += count;
-					// publishing the progress
 					publishProgress("" + (int) ((total * 100) / lenghtOfFile));
 					output.write(data, 0, count);
 				}
-
 				output.flush();
 				output.close();
 				input.close();
@@ -124,7 +165,7 @@ public class GioLightUpdActivity extends Activity {
 
 	public boolean button5_Click(View v) {
 		if (isInternetOn()) {
-			String furlt = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
+			String furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
 			String cleanstr1 = furlt.substring(38, 70);
 			fnt = cleanstr1;
 
@@ -146,7 +187,7 @@ public class GioLightUpdActivity extends Activity {
 
 	public boolean button6_Click(View v) {
 		if (isInternetOn()) {
-			String furl = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
+			String furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
 			String cleanstr2 = furl.substring(38, 70);
 			fn = cleanstr2;
 
@@ -165,56 +206,46 @@ public class GioLightUpdActivity extends Activity {
 			return false;
 		}
 	}
-   
-	//download buttons ZONE
 
-	public void button1_Click(View v) {
-		switch (v.getId()) {
-		case R.id.button1:
-			Intent i = new Intent(this, Alert.class);
-			startActivity(i);
-			break;
-		}
-	}
-
-	public void button2_Click(View v) {
-		switch (v.getId()) {
-		case R.id.button2:
-			Intent i = new Intent(this, Install.class);
-			startActivity(i);
-			break;
-		}
-	}
-
-	public void button3_Click(View v) {
-		switch (v.getId()) {
-		case R.id.button3:
-			Intent i = new Intent(this, Info.class);
-			startActivity(i);
-			break;
-		}
-	}
-
-	// Update
+	// Check new
 	public boolean button4_Click(View v) {
 		if (isInternetOn()) {
+			onResume();
+			if (CheckboxPreference = true) {
+				String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
+				TextView tv1 = (TextView) findViewById(R.id.textView1);
+				tv1.setText("Стабильная версия: " + str1);
+
+				Button bt6 = (Button) findViewById(R.id.button6);
+				bt6.setVisibility(View.GONE);
+				Button bt5 = (Button) findViewById(R.id.button5);
+				bt5.setVisibility(View.VISIBLE);
+			} else {
+				String str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
+				TextView tv2 = (TextView) findViewById(R.id.textView1);
+				tv2.setText("Тестовая версия: " + str2);
+
+				Button bt5 = (Button) findViewById(R.id.button5);
+				bt5.setVisibility(View.GONE);
+				Button bt6 = (Button) findViewById(R.id.button6);
+				bt6.setVisibility(View.VISIBLE);
+			}
 			
-			String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
-			TextView tv2 = (TextView) findViewById(R.id.textView2);
-			tv2.setText("Билд - " + str1);
-
-			String str3 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
-			TextView tv4 = (TextView) findViewById(R.id.textView4);
-			tv4.setText("Билд - " + str3);
-
+			// Show Toast
 			Toast.makeText(this, "Готово!", Toast.LENGTH_SHORT).show();
+			
+			// Enable buttons
+			Button button5 = (Button) findViewById(R.id.button5);
+			button5.setEnabled(true);
+			Button button6 = (Button) findViewById(R.id.button6);
+			button6.setEnabled(true);
 
 			return true;
 		} else {
 			Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-
+		
 	}
 
 	private InputStream OpenHttpConnection(String urlString) throws IOException {
@@ -256,7 +287,7 @@ public class GioLightUpdActivity extends Activity {
 		char[] inputBuffer = new char[BUFFER_SIZE];
 		try {
 			while ((charRead = isr.read(inputBuffer)) > 0) {
-				// ---convert the chars to a String---
+				// convert the chars to a String
 				String readString = String
 						.copyValueOf(inputBuffer, 0, charRead);
 				str += readString;
@@ -271,38 +302,40 @@ public class GioLightUpdActivity extends Activity {
 		return str;
 	}
 
-	// check internet
+	// Check internet
 	public final boolean isInternetOn() {
 		ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		// ARE WE CONNECTED TO THE NET
 		if (connec.getNetworkInfo(0).getState() == NetworkInfo.State.CONNECTED
 				|| connec.getNetworkInfo(0).getState() == NetworkInfo.State.CONNECTING
 				|| connec.getNetworkInfo(1).getState() == NetworkInfo.State.CONNECTING
 				|| connec.getNetworkInfo(1).getState() == NetworkInfo.State.CONNECTED) {
-			// MESSAGE TO SCREEN FOR TESTING (IF REQ)
-			//Toast.makeText(this, "Готово! :)", Toast.LENGTH_SHORT).show();
 			return true;
 		} else if (connec.getNetworkInfo(0).getState() == NetworkInfo.State.DISCONNECTED
 				|| connec.getNetworkInfo(1).getState() == NetworkInfo.State.DISCONNECTED) {
-			// System.out.println(“Not Connected”);
 			return false;
 		}
 		return false;
 	}
 
-	// MENU
+	// Menu
 	Menu myMenu = null;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		this.myMenu = menu;
-		MenuItem item1 = menu.add(0, 1, 0, R.string.exit);
-		item1.setIcon(R.drawable.exit);
-		MenuItem item2 = menu.add(0, 2, 0, R.string.vote);
-		item2.setIcon(R.drawable.vote);
-		MenuItem item3 = menu.add(0, 3, 0, R.string.about);
-		item3.setIcon(R.drawable.about);
+		MenuItem item1 = menu.add(0, 1, 0, R.string.pref_label);
+		item1.setIcon(R.drawable.ic_menu_pref);
+		MenuItem item2 = menu.add(0, 2, 0, R.string.alert_label);
+		item2.setIcon(R.drawable.ic_menu_alert);
+		MenuItem item3 = menu.add(0, 3, 0, R.string.install_label);
+		item3.setIcon(R.drawable.ic_menu_install);
+		MenuItem item4 = menu.add(0, 4, 0, R.string.info_label);
+		item4.setIcon(R.drawable.ic_menu_info);
+		MenuItem item5 = menu.add(0, 5, 0, R.string.vote);
+		item5.setIcon(R.drawable.ic_menu_vote);
+		MenuItem item6 = menu.add(0, 6, 0, R.string.about);
+		item6.setIcon(R.drawable.ic_menu_about);
 		return true;
 	}
 
@@ -316,7 +349,7 @@ public class GioLightUpdActivity extends Activity {
 						dialog.cancel();
 					}
 				});
-		aboutDialog.setIcon(R.drawable.about);
+		aboutDialog.setIcon(R.drawable.ic_menu_about);
 		aboutDialog.show();
 	}
 
@@ -324,15 +357,29 @@ public class GioLightUpdActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case 1:
-			finish();
+			Intent settingsActivity = new Intent(getBaseContext(),
+					Preferences.class);
+			startActivity(settingsActivity);
 			break;
 		case 2:
+			Intent alert = new Intent(this, Alert.class);
+			startActivity(alert);
+			break;
+		case 3:
+			Intent install = new Intent(this, Install.class);
+			startActivity(install);
+			break;
+		case 4:
+			Intent info = new Intent(this, Info.class);
+			startActivity(info);
+			break;
+		case 5:
 			Intent marketIntent2 = new Intent(Intent.ACTION_VIEW,
 					Uri.parse("http://market.android.com/details?id="
 							+ getPackageName()));
 			startActivity(marketIntent2);
 			break;
-		case 3:
+		case 6:
 			AboutDialog();
 			return true;
 		}
