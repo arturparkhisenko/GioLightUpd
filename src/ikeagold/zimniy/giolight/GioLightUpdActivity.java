@@ -46,6 +46,8 @@ public class GioLightUpdActivity extends Activity {
 	public String glv; // for <> in future use
 	public boolean Test;
 	public boolean Upd;
+	public String str1;
+	public String str2;
 	SharedPreferences prefs;
 
 	/** Called when the activity is first created. */
@@ -53,8 +55,12 @@ public class GioLightUpdActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		// Strings clean
+		str1 = "\n";
+		str2 = "\n";
 
-		// get version installed
+		// Get version installed
 		TextView tv9 = (TextView) findViewById(R.id.textView9);
 		String cleanstr3 = "";
 
@@ -96,10 +102,10 @@ public class GioLightUpdActivity extends Activity {
 		
 		if (Test == false) {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Стабильная версия: -\n");
+			tv1.setText("Стабильная версия: -" + str1);
 		} else {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Тестовая версия: -\n");
+			tv1.setText("Тестовая версия: -" + str2);
 		}
 
 		if (Upd == false) {
@@ -215,11 +221,11 @@ public class GioLightUpdActivity extends Activity {
 		fn = cleanstr2;
 
 		if (Test == false) {
-			String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
+			str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Стабильная версия: " + str1);
 		} else {
-			String str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
+			str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
 			TextView tv2 = (TextView) findViewById(R.id.textView1);
 			tv2.setText("Тестовая версия: " + str2);
 		}
