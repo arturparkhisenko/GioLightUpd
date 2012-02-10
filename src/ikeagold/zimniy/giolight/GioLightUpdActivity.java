@@ -43,6 +43,8 @@ public class GioLightUpdActivity extends Activity {
 	private ProgressDialog mProgressDialog;
 	public String fn;
 	public String fnt;
+	public String furlt;
+	public String furl;
 	public String glv;
 	public boolean Test;
 	SharedPreferences prefs;
@@ -68,19 +70,20 @@ public class GioLightUpdActivity extends Activity {
 		glv = "Установленная версия: " + cleanstr3 + "\n";
 		tv9.setText(glv);
 
-		// off buttons
+		// off button
 		Button button5 = (Button) findViewById(R.id.button5);
 		button5.setEnabled(false);
-		Button button6 = (Button) findViewById(R.id.button6);
-		button6.setEnabled(false);
 
-		// Hide buttons
-		Button bt5 = (Button) findViewById(R.id.button5);
-		bt5.setVisibility(View.GONE);
-		Button bt6 = (Button) findViewById(R.id.button6);
-		bt6.setVisibility(View.GONE);
-
-		Test = false;
+		// Load saved caption
+		if (Test == false) {
+			TextView tv1 = (TextView) findViewById(R.id.textView1);
+			tv1.setText("Стабильная версия:");
+		} else {
+			TextView tv1 = (TextView) findViewById(R.id.textView1);
+			tv1.setText("Тестовая версия:");
+		}
+		
+		
 	}
 
 	// Get Preferences
@@ -89,22 +92,6 @@ public class GioLightUpdActivity extends Activity {
 		super.onResume();
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		Test = prefs.getBoolean("testkey", false);
-
-		if (Test == false) {
-			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Стабильная версия:");
-			Button bt6 = (Button) findViewById(R.id.button6);
-			bt6.setVisibility(View.GONE);
-			Button bt5 = (Button) findViewById(R.id.button5);
-			bt5.setVisibility(View.VISIBLE);
-		} else {
-			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Тестовая версия:");
-			Button bt5 = (Button) findViewById(R.id.button5);
-			bt5.setVisibility(View.GONE);
-			Button bt6 = (Button) findViewById(R.id.button6);
-			bt6.setVisibility(View.VISIBLE);
-		}
 	}
 
 	// Download buttons ZONE
@@ -174,9 +161,6 @@ public class GioLightUpdActivity extends Activity {
 	// Download button
 	public boolean button5_Click(View v) {
 		if (isInternetOn()) {
-			String furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
-			String cleanstr1 = furlt.substring(38, 70);
-			fnt = cleanstr1;
 
 			DownloadFile downloadFile = new DownloadFile();
 			downloadFile.execute(furlt);
@@ -196,9 +180,7 @@ public class GioLightUpdActivity extends Activity {
 
 	public boolean button6_Click(View v) {
 		if (isInternetOn()) {
-			String furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
-			String cleanstr2 = furl.substring(38, 70);
-			fn = cleanstr2;
+			
 
 			DownloadFile downloadFile = new DownloadFile();
 			downloadFile.execute(furl);
@@ -219,6 +201,16 @@ public class GioLightUpdActivity extends Activity {
 	// Check new
 	public boolean button4_Click(View v) {
 		if (isInternetOn()) {
+			
+			furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
+			String cleanstr1 = furlt.substring(38, 70);
+			fnt = cleanstr1;
+			
+			furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
+			String cleanstr2 = furl.substring(38, 70);
+			fn = cleanstr2;
+			
+			
 			if (Test == false) {
 				String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
 				TextView tv1 = (TextView) findViewById(R.id.textView1);
