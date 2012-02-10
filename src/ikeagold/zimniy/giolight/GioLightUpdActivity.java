@@ -38,14 +38,13 @@ import android.widget.Toast;
 
 public class GioLightUpdActivity extends Activity {
 
-	// public var's
 	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
 	private ProgressDialog mProgressDialog;
 	public String fn;
 	public String fnt;
 	public String furlt;
 	public String furl;
-	public String glv;
+	public String glv; // for <> in future use
 	public boolean Test;
 	SharedPreferences prefs;
 
@@ -82,8 +81,6 @@ public class GioLightUpdActivity extends Activity {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Тестовая версия:");
 		}
-		
-		
 	}
 
 	// Get Preferences
@@ -161,36 +158,23 @@ public class GioLightUpdActivity extends Activity {
 	// Download button
 	public boolean button5_Click(View v) {
 		if (isInternetOn()) {
-
-			DownloadFile downloadFile = new DownloadFile();
-			downloadFile.execute(furlt);
-
-			String RootDir = Environment.getExternalStorageDirectory()
-					+ File.separator + "Light";
-			File from = new File(RootDir, ("1.zip"));
-			File to = new File(RootDir, fnt);
-			from.renameTo(to);
-
-			return true;
-		} else {
-			Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT).show();
-			return false;
-		}
-	}
-
-	public boolean button6_Click(View v) {
-		if (isInternetOn()) {
-			
-
-			DownloadFile downloadFile = new DownloadFile();
-			downloadFile.execute(furl);
-
-			String RootDir = Environment.getExternalStorageDirectory()
-					+ File.separator + "Light";
-			File from = new File(RootDir, ("1.zip"));
-			File to = new File(RootDir, fn);
-			from.renameTo(to);
-
+			if (Test == false) {
+				DownloadFile downloadFile = new DownloadFile();
+				downloadFile.execute(furlt);
+				String RootDir = Environment.getExternalStorageDirectory()
+						+ File.separator + "Light";
+				File from = new File(RootDir, ("1.zip"));
+				File to = new File(RootDir, fnt);
+				from.renameTo(to);
+			} else {
+				DownloadFile downloadFile = new DownloadFile();
+				downloadFile.execute(furl);
+				String RootDir = Environment.getExternalStorageDirectory()
+						+ File.separator + "Light";
+				File from = new File(RootDir, ("1.zip"));
+				File to = new File(RootDir, fn);
+				from.renameTo(to);
+			}
 			return true;
 		} else {
 			Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT).show();
@@ -227,8 +211,6 @@ public class GioLightUpdActivity extends Activity {
 			// Enable buttons
 			Button button5 = (Button) findViewById(R.id.button5);
 			button5.setEnabled(true);
-			Button button6 = (Button) findViewById(R.id.button6);
-			button6.setEnabled(true);
 
 			return true;
 		} else {

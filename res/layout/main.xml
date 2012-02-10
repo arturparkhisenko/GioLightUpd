@@ -46,12 +46,4 @@
         android:onClick="button5_Click"
         android:text="@string/download" />
 
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="1dp"
-        android:onClick="button6_Click"
-        android:text="@string/download" />
-
 </LinearLayout>
