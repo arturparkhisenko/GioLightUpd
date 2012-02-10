@@ -16,7 +16,7 @@
 
 	<ImageView android:contentDescription="@string/divider"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:paddingBottom="1dp" android:paddingTop="15dp"
+		android:paddingBottom="1dp" android:paddingTop="17dp"
 		android:scaleType="fitXY" android:src="@android:drawable/divider_horizontal_dark" />
 
 	<TextView android:id="@+id/textView2" android:layout_width="wrap_content"

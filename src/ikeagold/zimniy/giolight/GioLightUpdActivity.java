@@ -57,8 +57,8 @@ public class GioLightUpdActivity extends Activity {
 		setContentView(R.layout.main);
 		
 		// Strings clean
-		str1 = "\n";
-		str2 = "\n";
+		str1 = "-\n";
+		str2 = "-\n";
 
 		// Get version installed
 		TextView tv9 = (TextView) findViewById(R.id.textView9);
@@ -98,6 +98,9 @@ public class GioLightUpdActivity extends Activity {
 		Upd = prefs.getBoolean("updkey", false);
 		Test = prefs.getBoolean("testkey", false);
 		
+		//MAYBE THIS 2 STRINGS
+		Button button5 = (Button) findViewById(R.id.button5);
+		button5.setEnabled(false);
 		
 		if (Test == false) {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
@@ -114,7 +117,8 @@ public class GioLightUpdActivity extends Activity {
 			} else {
 				Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT)
 						.show();
-				Button button5 = (Button) findViewById(R.id.button5);
+				//Button
+				 button5 = (Button) findViewById(R.id.button5);
 				button5.setEnabled(false);
 			}
 		}
