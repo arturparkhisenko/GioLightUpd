@@ -200,7 +200,7 @@ public class GioLightUpdActivity extends Activity {
 			return false;
 		}
 	}
-	
+
 	// Checking function separate
 	public void update() {
 		furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
