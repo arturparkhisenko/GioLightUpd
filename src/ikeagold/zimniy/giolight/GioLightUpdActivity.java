@@ -98,7 +98,6 @@ public class GioLightUpdActivity extends Activity {
 		Upd = prefs.getBoolean("updkey", false);
 		Test = prefs.getBoolean("testkey", false);
 		
-		//MAYBE THIS 2 STRINGS
 		Button button5 = (Button) findViewById(R.id.button5);
 		button5.setEnabled(false);
 		
@@ -117,8 +116,7 @@ public class GioLightUpdActivity extends Activity {
 			} else {
 				Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT)
 						.show();
-				//Button
-				 button5 = (Button) findViewById(R.id.button5);
+				button5 = (Button) findViewById(R.id.button5);
 				button5.setEnabled(false);
 			}
 		}
