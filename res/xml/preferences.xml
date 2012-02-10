@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/pref_title" >
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="testkey"
-            android:title="@string/pref_test_title" />
-    </PreferenceCategory>
+	<PreferenceCategory android:title="@string/pref_title">
+		<CheckBoxPreference android:defaultValue="false"
+			android:key="updkey" android:summary="@string/pref_upd_summary"
+			android:title="@string/pref_upd_title" />
+		<CheckBoxPreference android:defaultValue="false"
+			android:key="testkey" android:title="@string/pref_test_title" />
+		<CheckBoxPreference android:defaultValue="false"
+			android:enabled="false" android:key="downloadkey" android:summary="@string/pref_download_summary"
+			android:title="@string/pref_download_title" />
+	</PreferenceCategory>
 
 </PreferenceScreen>

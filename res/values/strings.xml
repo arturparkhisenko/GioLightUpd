@@ -16,7 +16,11 @@
     <string name="download">Скачать</string>
     <string name="pref_label">Настройки</string>
     <string name="pref_title">Общие</string>
+    <string name="pref_upd_title">Проверять обновления</string>
+    <string name="pref_upd_summary">При старте GioLightUpd</string>
     <string name="pref_test_title">Тестовые версии</string>
+    <string name="pref_download_title">Загрузка в программе</string>
+    <string name="pref_download_summary">Использовать программу Загрузки?</string>
     <string name="alert_text">Важно:\n\n
 		- Без CWM (минимально 2.3 Android) данную прошивку использовать нельзя.\n\n
 		- Файловая система по-умолчанию ext4 - переход на другую прошивку возможен только после многофайловой прошивки через Odin.\n\n
