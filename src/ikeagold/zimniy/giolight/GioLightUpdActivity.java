@@ -89,8 +89,22 @@ public class GioLightUpdActivity extends Activity {
 		super.onResume();
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		Test = prefs.getBoolean("testkey", false);
-		
-		показать кнопки
+
+		if (Test == false) {
+			TextView tv1 = (TextView) findViewById(R.id.textView1);
+			tv1.setText("Стабильная версия:");
+			Button bt6 = (Button) findViewById(R.id.button6);
+			bt6.setVisibility(View.GONE);
+			Button bt5 = (Button) findViewById(R.id.button5);
+			bt5.setVisibility(View.VISIBLE);
+		} else {
+			TextView tv1 = (TextView) findViewById(R.id.textView1);
+			tv1.setText("Тестовая версия:");
+			Button bt5 = (Button) findViewById(R.id.button5);
+			bt5.setVisibility(View.GONE);
+			Button bt6 = (Button) findViewById(R.id.button6);
+			bt6.setVisibility(View.VISIBLE);
+		}
 	}
 
 	// Download buttons ZONE
@@ -209,20 +223,10 @@ public class GioLightUpdActivity extends Activity {
 				String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
 				TextView tv1 = (TextView) findViewById(R.id.textView1);
 				tv1.setText("Стабильная версия: " + str1);
-
-				Button bt6 = (Button) findViewById(R.id.button6);
-				bt6.setVisibility(View.GONE);
-				Button bt5 = (Button) findViewById(R.id.button5);
-				bt5.setVisibility(View.VISIBLE);
 			} else {
 				String str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
 				TextView tv2 = (TextView) findViewById(R.id.textView1);
 				tv2.setText("Тестовая версия: " + str2);
-
-				Button bt5 = (Button) findViewById(R.id.button5);
-				bt5.setVisibility(View.GONE);
-				Button bt6 = (Button) findViewById(R.id.button6);
-				bt6.setVisibility(View.VISIBLE);
 			}
 
 			// Show Toast
