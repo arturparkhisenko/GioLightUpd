@@ -221,9 +221,6 @@ public class GioLightUpdActivity extends Activity {
 			tv2.setText("Тестовая версия: " + str2);
 		}
 
-		// Show Toast
-		Toast.makeText(this, "Готово!", Toast.LENGTH_SHORT).show();
-
 		// Enable buttons
 		Button button5 = (Button) findViewById(R.id.button5);
 		button5.setEnabled(true);
