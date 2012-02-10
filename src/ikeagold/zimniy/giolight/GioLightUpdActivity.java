@@ -76,10 +76,10 @@ public class GioLightUpdActivity extends Activity {
 		// Load saved caption
 		if (Test == false) {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Стабильная версия:");
+			tv1.setText("Стабильная версия: -\n");
 		} else {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Тестовая версия:");
+			tv1.setText("Тестовая версия: -\n");
 		}
 
 	}
@@ -91,12 +91,15 @@ public class GioLightUpdActivity extends Activity {
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		Upd = prefs.getBoolean("updkey", false);
 		Test = prefs.getBoolean("testkey", false);
+		Button button5 = (Button) findViewById(R.id.button5);
+		button5.setEnabled(false);
+		
 		if (Test == false) {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Стабильная версия:");
+			tv1.setText("Стабильная версия: -\n");
 		} else {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Тестовая версия:");
+			tv1.setText("Тестовая версия: -\n");
 		}
 
 		if (Upd == false) {
