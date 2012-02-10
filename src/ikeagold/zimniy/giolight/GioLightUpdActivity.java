@@ -27,7 +27,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-//import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -82,7 +81,7 @@ public class GioLightUpdActivity extends Activity {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Тестовая версия:");
 		}
-		
+
 	}
 
 	// Get Preferences
@@ -99,19 +98,19 @@ public class GioLightUpdActivity extends Activity {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Тестовая версия:");
 		}
-		
+
 		if (Upd == false) {
 		} else {
 			if (isInternetOn()) {
-				
+
 				furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
 				String cleanstr1 = furlt.substring(38, 70);
 				fnt = cleanstr1;
-				
+
 				furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
 				String cleanstr2 = furl.substring(38, 70);
 				fn = cleanstr2;
-				
+
 				if (Test == false) {
 					String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
 					TextView tv1 = (TextView) findViewById(R.id.textView1);
@@ -129,7 +128,8 @@ public class GioLightUpdActivity extends Activity {
 				Button button5 = (Button) findViewById(R.id.button5);
 				button5.setEnabled(true);
 			} else {
-				Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT)
+						.show();
 			}
 		}
 	}
@@ -228,15 +228,15 @@ public class GioLightUpdActivity extends Activity {
 	// Check new
 	public boolean button4_Click(View v) {
 		if (isInternetOn()) {
-			
+
 			furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
 			String cleanstr1 = furlt.substring(38, 70);
 			fnt = cleanstr1;
-			
+
 			furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
 			String cleanstr2 = furl.substring(38, 70);
 			fn = cleanstr2;
-			
+
 			if (Test == false) {
 				String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
 				TextView tv1 = (TextView) findViewById(R.id.textView1);
