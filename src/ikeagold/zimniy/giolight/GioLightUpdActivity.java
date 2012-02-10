@@ -83,6 +83,23 @@ public class GioLightUpdActivity extends Activity {
 			tv1.setText("Тестовая версия:");
 		}
 		
+	}
+
+	// Get Preferences
+	@Override
+	public void onResume() {
+		super.onResume();
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		Upd = prefs.getBoolean("updkey", false);
+		Test = prefs.getBoolean("testkey", false);
+		if (Test == false) {
+			TextView tv1 = (TextView) findViewById(R.id.textView1);
+			tv1.setText("Стабильная версия:");
+		} else {
+			TextView tv1 = (TextView) findViewById(R.id.textView1);
+			tv1.setText("Тестовая версия:");
+		}
+		
 		if (Upd == false) {
 		} else {
 			if (isInternetOn()) {
@@ -109,28 +126,11 @@ public class GioLightUpdActivity extends Activity {
 				Toast.makeText(this, "Готово!", Toast.LENGTH_SHORT).show();
 
 				// Enable buttons
-				button5 = (Button) findViewById(R.id.button5);
+				Button button5 = (Button) findViewById(R.id.button5);
 				button5.setEnabled(true);
 			} else {
 				Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT).show();
 			}
-		}
-		
-	}
-
-	// Get Preferences
-	@Override
-	public void onResume() {
-		super.onResume();
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		Upd = prefs.getBoolean("updkey", false);
-		Test = prefs.getBoolean("testkey", false);
-		if (Test == false) {
-			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Стабильная версия:");
-		} else {
-			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Тестовая версия:");
 		}
 	}
 
