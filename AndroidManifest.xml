@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ikeagold.zimniy.giolight"
     android:versionCode="1"
-    android:versionName="0.62" >
+    android:versionName="0.64" >
 
     <uses-sdk android:minSdkVersion="10" />
 

@@ -25,6 +25,15 @@
         android:text="@string/update_label"
         android:textStyle="bold" />
 
+    <ImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="1dp"
+        android:paddingTop="15dp"
+        android:scaleType="fitXY"
+        android:src="@android:drawable/divider_horizontal_dark" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
