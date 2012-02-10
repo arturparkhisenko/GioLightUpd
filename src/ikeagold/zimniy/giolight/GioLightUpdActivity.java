@@ -102,31 +102,7 @@ public class GioLightUpdActivity extends Activity {
 		if (Upd == false) {
 		} else {
 			if (isInternetOn()) {
-
-				furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
-				String cleanstr1 = furlt.substring(38, 70);
-				fnt = cleanstr1;
-
-				furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
-				String cleanstr2 = furl.substring(38, 70);
-				fn = cleanstr2;
-
-				if (Test == false) {
-					String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
-					TextView tv1 = (TextView) findViewById(R.id.textView1);
-					tv1.setText("Стабильная версия: " + str1);
-				} else {
-					String str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
-					TextView tv2 = (TextView) findViewById(R.id.textView1);
-					tv2.setText("Тестовая версия: " + str2);
-				}
-
-				// Show Toast
-				Toast.makeText(this, "Готово!", Toast.LENGTH_SHORT).show();
-
-				// Enable buttons
-				Button button5 = (Button) findViewById(R.id.button5);
-				button5.setEnabled(true);
+				update();
 			} else {
 				Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT)
 						.show();
@@ -224,36 +200,39 @@ public class GioLightUpdActivity extends Activity {
 			return false;
 		}
 	}
+	
+	// Checking function separate
+	public void update() {
+		furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
+		String cleanstr1 = furlt.substring(38, 70);
+		fnt = cleanstr1;
+
+		furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
+		String cleanstr2 = furl.substring(38, 70);
+		fn = cleanstr2;
+
+		if (Test == false) {
+			String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
+			TextView tv1 = (TextView) findViewById(R.id.textView1);
+			tv1.setText("Стабильная версия: " + str1);
+		} else {
+			String str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
+			TextView tv2 = (TextView) findViewById(R.id.textView1);
+			tv2.setText("Тестовая версия: " + str2);
+		}
+
+		// Show Toast
+		Toast.makeText(this, "Готово!", Toast.LENGTH_SHORT).show();
+
+		// Enable buttons
+		Button button5 = (Button) findViewById(R.id.button5);
+		button5.setEnabled(true);
+	}
 
 	// Check new
 	public boolean button4_Click(View v) {
 		if (isInternetOn()) {
-
-			furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
-			String cleanstr1 = furlt.substring(38, 70);
-			fnt = cleanstr1;
-
-			furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
-			String cleanstr2 = furl.substring(38, 70);
-			fn = cleanstr2;
-
-			if (Test == false) {
-				String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
-				TextView tv1 = (TextView) findViewById(R.id.textView1);
-				tv1.setText("Стабильная версия: " + str1);
-			} else {
-				String str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
-				TextView tv2 = (TextView) findViewById(R.id.textView1);
-				tv2.setText("Тестовая версия: " + str2);
-			}
-
-			// Show Toast
-			Toast.makeText(this, "Готово!", Toast.LENGTH_SHORT).show();
-
-			// Enable buttons
-			Button button5 = (Button) findViewById(R.id.button5);
-			button5.setEnabled(true);
-
+			update();
 			return true;
 		} else {
 			Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT).show();
