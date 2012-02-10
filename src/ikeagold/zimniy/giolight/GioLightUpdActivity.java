@@ -27,6 +27,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+//import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,14 +37,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class GioLightUpdActivity extends Activity {
-	
+
 	// public var's
 	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
 	private ProgressDialog mProgressDialog;
 	public String fn;
 	public String fnt;
 	public String glv;
-	public boolean CheckboxPreference;
+	public boolean Test;
+	SharedPreferences prefs;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -77,39 +79,35 @@ public class GioLightUpdActivity extends Activity {
 		bt5.setVisibility(View.GONE);
 		Button bt6 = (Button) findViewById(R.id.button6);
 		bt6.setVisibility(View.GONE);
-		
+
+		Test = false;
 	}
 
 	// Get Preferences
 	@Override
 	public void onResume() {
 		super.onResume();
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		CheckboxPreference = prefs.getBoolean("checkboxPref", false);
-
-		if (CheckboxPreference = true) {
-			Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
-		} else {
-			Toast.makeText(this, "0", Toast.LENGTH_SHORT).show();
-		}
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		Test = prefs.getBoolean("testkey", false);
+		
+		показать кнопки
 	}
 
 	// Download buttons ZONE
 	@Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DIALOG_DOWNLOAD_PROGRESS:
-                mProgressDialog = new ProgressDialog(this);
-                mProgressDialog.setMessage("Качает в /sd-card/Light/...");
-                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                mProgressDialog.setCancelable(false);
-                mProgressDialog.show();
-                return mProgressDialog; 
-            default:
-                return null;
-        }
-    }
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case DIALOG_DOWNLOAD_PROGRESS:
+			mProgressDialog = new ProgressDialog(this);
+			mProgressDialog.setMessage("Качает в /sd-card/Light/...");
+			mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			mProgressDialog.setCancelable(false);
+			mProgressDialog.show();
+			return mProgressDialog;
+		default:
+			return null;
+		}
+	}
 
 	private class DownloadFile extends AsyncTask<String, String, String> {
 
@@ -207,7 +205,7 @@ public class GioLightUpdActivity extends Activity {
 	// Check new
 	public boolean button4_Click(View v) {
 		if (isInternetOn()) {
-			if (CheckboxPreference = false) {
+			if (Test == false) {
 				String str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
 				TextView tv1 = (TextView) findViewById(R.id.textView1);
 				tv1.setText("Стабильная версия: " + str1);
@@ -226,10 +224,10 @@ public class GioLightUpdActivity extends Activity {
 				Button bt6 = (Button) findViewById(R.id.button6);
 				bt6.setVisibility(View.VISIBLE);
 			}
-			
+
 			// Show Toast
 			Toast.makeText(this, "Готово!", Toast.LENGTH_SHORT).show();
-			
+
 			// Enable buttons
 			Button button5 = (Button) findViewById(R.id.button5);
 			button5.setEnabled(true);
@@ -241,7 +239,7 @@ public class GioLightUpdActivity extends Activity {
 			Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		
+
 	}
 
 	private InputStream OpenHttpConnection(String urlString) throws IOException {
@@ -353,8 +351,7 @@ public class GioLightUpdActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case 1:
-			Intent Prefs = new Intent(this,
-					Prefs.class);
+			Intent Prefs = new Intent(this, Prefs.class);
 			startActivity(Prefs);
 			break;
 		case 2:
