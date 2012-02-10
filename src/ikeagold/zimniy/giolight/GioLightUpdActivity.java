@@ -72,7 +72,7 @@ public class GioLightUpdActivity extends Activity {
 			ifc.destroy();
 		} catch (java.io.IOException e) {
 		}
-		glv = "Установленная версия: " + cleanstr3 + "\n";
+		glv = "\n" + "Установленная версия: " + cleanstr3 + "\n";
 		tv9.setText(glv);
 
 		// off button

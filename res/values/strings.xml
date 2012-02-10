@@ -12,8 +12,9 @@
     <string name="install_label">Установка</string>
     <string name="info_label">Описание</string>
     <string name="label"></string>
-    <string name="note">Установленная версия:\n</string>
+    <string name="note">\nУстановленная версия:\n</string>
     <string name="download">Скачать</string>
+    <string name="divider"></string>
     <string name="pref_label">Настройки</string>
     <string name="pref_title">Общие</string>
     <string name="pref_upd_title">Проверять обновления</string>
