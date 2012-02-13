@@ -47,6 +47,7 @@ public class GioLightUpdActivity extends Activity {
 	public String furlt;
 	public String furl;
 	public String glv;
+	public String glvc;
 	public String nglv;
 	public boolean Test;
 	public boolean Upd;
@@ -76,6 +77,7 @@ public class GioLightUpdActivity extends Activity {
 			ifc.destroy();
 		} catch (java.io.IOException e) {
 		}
+		glvc = cleanstr3;
 		glv = "\n" + "Установленная версия: " + cleanstr3 + "\n";
 		tv9.setText(glv);
 
@@ -231,10 +233,16 @@ public class GioLightUpdActivity extends Activity {
 			str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Стабильная версия: " + str1);
+			
+			glvc = str1;
+			NewRom();
 		} else {
 			str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
 			TextView tv2 = (TextView) findViewById(R.id.textView1);
 			tv2.setText("Тестовая версия: " + str2);
+			
+			glvc = str2;
+			NewRom();
 		}
 
 		// Enable buttons
@@ -392,26 +400,17 @@ public class GioLightUpdActivity extends Activity {
 	}
 	
 	// Notifications on NEW revision of ROM
-	
 	private void NewRom() {
-		// Temporary and don't forget to set nglv after check...
-		nglv = "";
-		// Compares part 1
-		if (glv.trim().equalsIgnoreCase(nglv.trim())) 
-		{     
+		// Compares
+		if (glv.trim().equalsIgnoreCase(nglv.trim())) {
 			// Nothing because ROM equals
 		} else {
-			// If not equals do part 2..if number >
-			
+			// If new - notify
+			if (Integer.parseInt(nglv) > Integer.parseInt(glvc)) {
+				NewRomNotification();
+			}
 		}
-		
-		// If new - notify
-		NewRomNotification();
 	}
-	
-	// Same
-	
-	
 
 	private void NewRomNotification() {
 		String ns = Context.NOTIFICATION_SERVICE;
@@ -421,7 +420,7 @@ public class GioLightUpdActivity extends Activity {
 		long when = System.currentTimeMillis();
 		Notification notification = new Notification(icon, contentTitle, when);
 		Context context = getApplicationContext();
-		CharSequence contentText = "Есть обновления ROM";
+		CharSequence contentText = "Есть обновление ROM";
 		// ON CLICK *.class
 		Intent notificationIntent = new Intent(this, GioLightUpdActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
