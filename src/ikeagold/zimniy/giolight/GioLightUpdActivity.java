@@ -15,6 +15,9 @@ import java.net.URLConnection;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -386,4 +389,36 @@ public class GioLightUpdActivity extends Activity {
 		}
 		return false;
 	}
+	
+	// Notifications on NEW revision of ROM
+	
+	private void NewRom() {
+		// Compares
+		
+		// If no new - nothing
+		
+		// If new - notify
+		NewRomNotification();
+	}
+
+	private void NewRomNotification() {
+		String ns = Context.NOTIFICATION_SERVICE;
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
+		int icon = R.drawable.ic_launcher;
+		CharSequence tickerText = "Hello";
+		long when = System.currentTimeMillis();
+		Notification notification = new Notification(icon, tickerText, when);
+		Context context = getApplicationContext();
+		CharSequence contentTitle = "GioLightUpd";
+		CharSequence contentText = "Есть обновления ROM";
+		// ON CLICK *.class
+		Intent notificationIntent = new Intent(this, GioLightUpdActivity.class);
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+				notificationIntent, 0);
+		notification.setLatestEventInfo(context, contentTitle, contentText,
+				contentIntent);
+		final int HELLO_ID = 1;
+		mNotificationManager.notify(HELLO_ID, notification);
+	}
+	
 }
