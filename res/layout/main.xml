@@ -14,8 +14,8 @@
 		android:onClick="button4_Click" android:text="@string/update_label"
 		android:textStyle="bold" />
 
-	<ImageView android:contentDescription="@string/divider"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
+	<ImageView android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:contentDescription="@string/divider"
 		android:paddingBottom="1dp" android:paddingTop="17dp"
 		android:scaleType="fitXY" android:src="@android:drawable/divider_horizontal_dark" />
 
