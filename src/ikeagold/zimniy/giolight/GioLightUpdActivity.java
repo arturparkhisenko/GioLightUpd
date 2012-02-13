@@ -48,7 +48,7 @@ public class GioLightUpdActivity extends Activity {
 	public String furl;
 	public String glv;
 	public String glvc;
-	public String nglv;
+	public String glvn;
 	public boolean Test;
 	public boolean Upd;
 	public String str1;
@@ -96,7 +96,7 @@ public class GioLightUpdActivity extends Activity {
 
 	}
 
-	// Get Preferences
+	// onResume
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -234,14 +234,14 @@ public class GioLightUpdActivity extends Activity {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Стабильная версия: " + str1);
 			
-			glvc = str1;
+			glvn = str1;
 			NewRom();
 		} else {
 			str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
 			TextView tv2 = (TextView) findViewById(R.id.textView1);
 			tv2.setText("Тестовая версия: " + str2);
 			
-			glvc = str2;
+			glvn = str2;
 			NewRom();
 		}
 
@@ -399,15 +399,16 @@ public class GioLightUpdActivity extends Activity {
 		return false;
 	}
 	
-	// Notifications on NEW revision of ROM
+	// Notifications on Compare old and NEW revision of ROM
 	private void NewRom() {
-		// Compares
-		if (glv.trim().equalsIgnoreCase(nglv.trim())) {
+		if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
 			// Nothing because ROM equals
 		} else {
 			// If new - notify
-			if (Integer.parseInt(nglv) > Integer.parseInt(glvc)) {
+			if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn.trim())) {
 				NewRomNotification();
+			} else {
+				// Nothing
 			}
 		}
 	}
@@ -430,5 +431,5 @@ public class GioLightUpdActivity extends Activity {
 		final int HELLO_ID = 1;
 		mNotificationManager.notify(HELLO_ID, notification);
 	}
-	
+
 }
