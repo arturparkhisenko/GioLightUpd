@@ -46,7 +46,8 @@ public class GioLightUpdActivity extends Activity {
 	public String fnt;
 	public String furlt;
 	public String furl;
-	public String glv; // for <> in future use
+	public String glv;
+	public String nglv;
 	public boolean Test;
 	public boolean Upd;
 	public String str1;
@@ -393,23 +394,33 @@ public class GioLightUpdActivity extends Activity {
 	// Notifications on NEW revision of ROM
 	
 	private void NewRom() {
-		// Compares
-		
-		// If no new - nothing
+		// Temporary and don't forget to set nglv after check...
+		nglv = "";
+		// Compares part 1
+		if (glv.trim().equalsIgnoreCase(nglv.trim())) 
+		{     
+			// Nothing because ROM equals
+		} else {
+			// If not equals do part 2..if number >
+			
+		}
 		
 		// If new - notify
 		NewRomNotification();
 	}
+	
+	// Same
+	
+	
 
 	private void NewRomNotification() {
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
 		int icon = R.drawable.ic_launcher;
-		CharSequence tickerText = "Hello";
-		long when = System.currentTimeMillis();
-		Notification notification = new Notification(icon, tickerText, when);
-		Context context = getApplicationContext();
 		CharSequence contentTitle = "GioLightUpd";
+		long when = System.currentTimeMillis();
+		Notification notification = new Notification(icon, contentTitle, when);
+		Context context = getApplicationContext();
 		CharSequence contentText = "Есть обновления ROM";
 		// ON CLICK *.class
 		Intent notificationIntent = new Intent(this, GioLightUpdActivity.class);
