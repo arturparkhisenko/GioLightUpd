@@ -2,6 +2,7 @@ package ikeagold.zimniy.giolight;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +28,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -50,6 +52,9 @@ public class GioLightUpdActivity extends Activity {
 	public String str1;
 	public String str2;
 	public String zfn;
+	boolean mExternalStorageAvailable;
+	boolean mExternalStorageWriteable;
+	
 	SharedPreferences prefs;
 
 	/** Called when the activity is first created. */
@@ -90,6 +95,40 @@ public class GioLightUpdActivity extends Activity {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Тестовая версия: -\n");
 		}
+		
+		//DEV
+		mExternalStorageAvailable = false;
+	    mExternalStorageWriteable = false;
+	    String state = Environment.getExternalStorageState();
+
+	    if (Environment.MEDIA_MOUNTED.equals(state)) {
+	        // We can read and write the media
+	        mExternalStorageAvailable = mExternalStorageWriteable = true;
+	    } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+	        // We can only read the media
+	        mExternalStorageAvailable = true;
+	        mExternalStorageWriteable = false;
+	        Toast.makeText(this,"Нет прав записи на sdcard",Toast.LENGTH_SHORT).show();
+	        finish();
+	    } else {
+	        // Something else is wrong. It may be one of many other states, but all we need
+	        //  to know is we can neither read nor write
+	        mExternalStorageAvailable = mExternalStorageWriteable = false;
+	        Toast.makeText(this,"Необходимо подключить sdcard.",Toast.LENGTH_SHORT).show();
+	        finish();
+	    }
+	    File folder = new File(Environment.getExternalStorageDirectory () + "/Light");
+	    boolean success = false;
+	    if(!folder.exists()){
+	         success = folder.mkdir();
+	    }
+	    if (!success) {
+	        Log.e("FILE", "can't create " + folder);
+	    }
+	    else 
+	    {
+	        Log.i("FILE", "directory is created"); 
+	    }
 
 	}
 
