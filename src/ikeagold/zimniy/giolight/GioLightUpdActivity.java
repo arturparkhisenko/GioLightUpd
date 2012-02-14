@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -96,7 +97,7 @@ public class GioLightUpdActivity extends Activity {
 			tv1.setText("Тестовая версия: -\n");
 		}
 		
-		//DEV
+		// Check sd-card and folder, if not exist - create.
 		mExternalStorageAvailable = false;
 	    mExternalStorageWriteable = false;
 	    String state = Environment.getExternalStorageState();
@@ -469,6 +470,16 @@ public class GioLightUpdActivity extends Activity {
 				contentIntent);
 		final int HELLO_ID = 2;
 		mNotificationManager.notify(HELLO_ID, notification);
+	}
+	
+	// DEV
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			moveTaskToBack(true);
+			return true;
+		}
+		return false;
 	}
 
 }
