@@ -2,7 +2,6 @@ package ikeagold.zimniy.giolight;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +27,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -42,8 +40,6 @@ public class GioLightUpdActivity extends Activity {
 
 	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
 	private ProgressDialog mProgressDialog;
-	public String fn;
-	public String fnt;
 	public String furlt;
 	public String furl;
 	public String glv;
@@ -53,6 +49,7 @@ public class GioLightUpdActivity extends Activity {
 	public boolean Upd;
 	public String str1;
 	public String str2;
+	public String zfn;
 	SharedPreferences prefs;
 
 	/** Called when the activity is first created. */
@@ -60,7 +57,7 @@ public class GioLightUpdActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		// Strings clean
 		str1 = "-\n";
 		str2 = "-\n";
@@ -103,10 +100,10 @@ public class GioLightUpdActivity extends Activity {
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		Upd = prefs.getBoolean("updkey", false);
 		Test = prefs.getBoolean("testkey", false);
-		
+
 		Button button5 = (Button) findViewById(R.id.button5);
 		button5.setEnabled(false);
-		
+
 		if (Test == false) {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Стабильная версия: " + str1);
@@ -159,12 +156,11 @@ public class GioLightUpdActivity extends Activity {
 				URL url1 = new URL(url[0]);
 				URLConnection conexion = url1.openConnection();
 				conexion.connect();
-				// progress bar 0-100%
 				int lenghtOfFile = conexion.getContentLength();
 				// download the file
 				InputStream input = new BufferedInputStream(url1.openStream());
-				OutputStream output = new FileOutputStream(
-						"/sdcard/Light/1.zip");
+				OutputStream output = new FileOutputStream("/sdcard/Light/"
+						+ zfn);
 				byte data[] = new byte[1024];
 				long total = 0;
 				while ((count = input.read(data)) != -1) {
@@ -175,6 +171,8 @@ public class GioLightUpdActivity extends Activity {
 				output.flush();
 				output.close();
 				input.close();
+				// Notification on end of download
+				DownloadRomNotification();
 			} catch (Exception e) {
 			}
 			return null;
@@ -198,19 +196,9 @@ public class GioLightUpdActivity extends Activity {
 			if (Test == false) {
 				DownloadFile downloadFile = new DownloadFile();
 				downloadFile.execute(furlt);
-				String RootDir = Environment.getExternalStorageDirectory()
-						+ File.separator + "Light";
-				File from = new File(RootDir, ("1.zip"));
-				File to = new File(RootDir, fnt);
-				from.renameTo(to);
 			} else {
 				DownloadFile downloadFile = new DownloadFile();
 				downloadFile.execute(furl);
-				String RootDir = Environment.getExternalStorageDirectory()
-						+ File.separator + "Light";
-				File from = new File(RootDir, ("1.zip"));
-				File to = new File(RootDir, fn);
-				from.renameTo(to);
 			}
 			return true;
 		} else {
@@ -221,26 +209,22 @@ public class GioLightUpdActivity extends Activity {
 
 	// Checking function separate
 	public void update() {
-		furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
-		String cleanstr1 = furlt.substring(38, 70);
-		fnt = cleanstr1;
-
-		furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
-		String cleanstr2 = furl.substring(38, 70);
-		fn = cleanstr2;
-
 		if (Test == false) {
+			furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
+			String cleanstr1 = furlt.substring(38, 70);
+			zfn = cleanstr1;
 			str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Стабильная версия: " + str1);
-			
 			glvn = str1;
 			NewRom();
 		} else {
+			furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
+			String cleanstr2 = furl.substring(38, 70);
+			zfn = cleanstr2;
 			str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
 			TextView tv2 = (TextView) findViewById(R.id.textView1);
 			tv2.setText("Тестовая версия: " + str2);
-			
 			glvn = str2;
 			NewRom();
 		}
@@ -398,17 +382,14 @@ public class GioLightUpdActivity extends Activity {
 		}
 		return false;
 	}
-	
-	// Notifications on Compare old and NEW revision of ROM
+
+	// Notifications, nothing if Equals, notify if New, else Nothing
 	private void NewRom() {
 		if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
-			// Nothing because ROM equals
 		} else {
-			// If new - notify
 			if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn.trim())) {
 				NewRomNotification();
 			} else {
-				// Nothing
 			}
 		}
 	}
@@ -429,6 +410,25 @@ public class GioLightUpdActivity extends Activity {
 		notification.setLatestEventInfo(context, contentTitle, contentText,
 				contentIntent);
 		final int HELLO_ID = 1;
+		mNotificationManager.notify(HELLO_ID, notification);
+	}
+
+	private void DownloadRomNotification() {
+		String ns = Context.NOTIFICATION_SERVICE;
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
+		int icon = R.drawable.ic_launcher;
+		CharSequence contentTitle = "GioLightUpd";
+		long when = System.currentTimeMillis();
+		Notification notification = new Notification(icon, contentTitle, when);
+		Context context = getApplicationContext();
+		CharSequence contentText = "ROM успешно загружен";
+		// ON CLICK *.class
+		Intent notificationIntent = new Intent(this, GioLightUpdActivity.class);
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+				notificationIntent, 0);
+		notification.setLatestEventInfo(context, contentTitle, contentText,
+				contentIntent);
+		final int HELLO_ID = 2;
 		mNotificationManager.notify(HELLO_ID, notification);
 	}
 
