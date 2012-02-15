@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">GioLightUpd</string>
-    <string name="exit">Выход</string>
     <string name="vote">Отзыв</string>
     <string name="about">Инфо</string>
     <string name="alasecond">Автор приложения Ikeagold\nАвтор прошивки ZimniY\nДля 4pda.ru</string>

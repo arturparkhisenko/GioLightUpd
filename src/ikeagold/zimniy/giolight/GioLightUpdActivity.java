@@ -425,12 +425,16 @@ public class GioLightUpdActivity extends Activity {
 
 	// Notifications, nothing if Equals, notify if New, else Nothing
 	private void NewRom() {
-		if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
-		} else {
-			if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn.trim())) {
-				NewRomNotification();
+		try {
+			if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
 			} else {
+				if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn
+						.trim())) {
+					NewRomNotification();
+				} else {
+				}
 			}
+		} finally {
 		}
 	}
 
@@ -472,7 +476,7 @@ public class GioLightUpdActivity extends Activity {
 		mNotificationManager.notify(HELLO_ID, notification);
 	}
 	
-	// DEV
+	// Don't close application
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
