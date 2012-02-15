@@ -425,7 +425,6 @@ public class GioLightUpdActivity extends Activity {
 
 	// Notifications, nothing if Equals, notify if New, else Nothing
 	private void NewRom() {
-		try {
 			if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
 			} else {
 				if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn
@@ -434,8 +433,6 @@ public class GioLightUpdActivity extends Activity {
 				} else {
 				}
 			}
-		} finally {
-		}
 	}
 
 	private void NewRomNotification() {
