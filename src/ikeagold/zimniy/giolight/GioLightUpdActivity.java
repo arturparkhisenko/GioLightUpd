@@ -270,6 +270,7 @@ public class GioLightUpdActivity extends Activity {
 
 	// Checking function separate
 	public void update() {
+		TextView tv3 = (TextView) findViewById(R.id.textView3);
 		if (Test == false) {
 			furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
 			String cleanstr1 = furlt.substring(38, 70);
@@ -279,6 +280,7 @@ public class GioLightUpdActivity extends Activity {
 			tv1.setText("Стабильная версия: " + str1);
 			glvn = str1;
 			NewRom();
+			tv3.setText(furlt);	
 		} else {
 			furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
 			String cleanstr2 = furl.substring(38, 70);
@@ -288,6 +290,7 @@ public class GioLightUpdActivity extends Activity {
 			tv2.setText("Тестовая версия: " + str2);
 			glvn = str2;
 			NewRom();
+			tv3.setText(furl);
 		}
 
 		// Enable buttons
@@ -304,7 +307,6 @@ public class GioLightUpdActivity extends Activity {
 			Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-
 	}
 
 	private InputStream OpenHttpConnection(String urlString) throws IOException {
