@@ -30,4 +30,8 @@
 		android:layout_height="wrap_content" android:layout_margin="1dp"
 		android:onClick="button5_Click" android:text="@string/download" />
 
+	<TextView android:id="@+id/textView3" android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:autoLink="web"
+		android:text="@string/label" />
+
 </LinearLayout>

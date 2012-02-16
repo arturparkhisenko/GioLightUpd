@@ -50,6 +50,7 @@ public class GioLightUpdActivity extends Activity {
 	public String glvn;
 	public boolean Test;
 	public boolean Upd;
+	public boolean Down;
 	public String str1;
 	public String str2;
 	public String zfn;
@@ -140,6 +141,7 @@ public class GioLightUpdActivity extends Activity {
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		Upd = prefs.getBoolean("updkey", false);
 		Test = prefs.getBoolean("testkey", false);
+		Down = prefs.getBoolean("downloadkey", false);
 
 		Button button5 = (Button) findViewById(R.id.button5);
 		button5.setEnabled(false);
@@ -161,6 +163,25 @@ public class GioLightUpdActivity extends Activity {
 						.show();
 				button5 = (Button) findViewById(R.id.button5);
 				button5.setEnabled(false);
+			}
+		}
+		
+		if (Down == false) {
+			// Disable text, show button
+			TextView tv3 = (TextView) findViewById(R.id.textView3);
+			tv3.setVisibility(View.GONE);
+			button5 = (Button) findViewById(R.id.button5);
+			button5.setVisibility(View.VISIBLE);
+		} else {
+			// Disable button, show text
+			button5 = (Button) findViewById(R.id.button5);
+			button5.setVisibility(View.GONE);
+			TextView tv3 = (TextView) findViewById(R.id.textView3);
+			tv3.setVisibility(View.VISIBLE);
+			if (Test == false) {
+				tv3.setText(furlt);
+			} else {
+				tv3.setText(furl);
 			}
 		}
 	}
