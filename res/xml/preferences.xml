@@ -9,6 +9,8 @@
 			android:key="testkey" android:title="@string/pref_test_title" />
 		<CheckBoxPreference android:defaultValue="false"
 			android:key="downloadkey" android:title="@string/pref_download_title" />
+		<CheckBoxPreference android:defaultValue="false"
+			android:enabled="false" android:title="@string/pref_sync_title" />
 	</PreferenceCategory>
 
 </PreferenceScreen>
