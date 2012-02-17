@@ -20,7 +20,7 @@
     <string name="pref_upd_summary">При старте GioLightUpd</string>
     <string name="pref_test_title">Тестовые версии</string>
     <string name="pref_download_title">Внешняя загрузка</string>
-    <string name="pref_sync_title">Фоновая проверка обновлений</string>
+    <string name="pref_sync_title">Фоновые обновления</string>
     <string name="alert_text">Важно:\n\n
 		- Без CWM (минимально 2.3 Android) данную прошивку использовать нельзя.\n\n
 		- Файловая система по-умолчанию ext4 - переход на другую прошивку возможен только после многофайловой прошивки через Odin. http://goo.gl/Xktpz \n\n

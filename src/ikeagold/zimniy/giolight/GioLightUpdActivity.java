@@ -51,12 +51,14 @@ public class GioLightUpdActivity extends Activity {
 	public boolean Test;
 	public boolean Upd;
 	public boolean Down;
+	public boolean Sync;
+	public int Time;
 	public String str1;
 	public String str2;
 	public String zfn;
 	boolean mExternalStorageAvailable;
 	boolean mExternalStorageWriteable;
-	
+
 	SharedPreferences prefs;
 
 	/** Called when the activity is first created. */
@@ -97,40 +99,42 @@ public class GioLightUpdActivity extends Activity {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Тестовая версия: -\n");
 		}
-		
+
 		// Check sd-card and folder, if not exist - create.
 		mExternalStorageAvailable = false;
-	    mExternalStorageWriteable = false;
-	    String state = Environment.getExternalStorageState();
+		mExternalStorageWriteable = false;
+		String state = Environment.getExternalStorageState();
 
-	    if (Environment.MEDIA_MOUNTED.equals(state)) {
-	        // We can read and write the media
-	        mExternalStorageAvailable = mExternalStorageWriteable = true;
-	    } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-	        // We can only read the media
-	        mExternalStorageAvailable = true;
-	        mExternalStorageWriteable = false;
-	        Toast.makeText(this,"Нет прав записи на sdcard",Toast.LENGTH_SHORT).show();
-	        finish();
-	    } else {
-	        // Something else is wrong. It may be one of many other states, but all we need
-	        //  to know is we can neither read nor write
-	        mExternalStorageAvailable = mExternalStorageWriteable = false;
-	        Toast.makeText(this,"Необходимо подключить sdcard.",Toast.LENGTH_SHORT).show();
-	        finish();
-	    }
-	    File folder = new File(Environment.getExternalStorageDirectory () + "/Light");
-	    boolean success = false;
-	    if(!folder.exists()){
-	         success = folder.mkdir();
-	    }
-	    if (!success) {
-	        Log.e("FILE", "can't create " + folder);
-	    }
-	    else 
-	    {
-	        Log.i("FILE", "directory is created"); 
-	    }
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+			// We can read and write the media
+			mExternalStorageAvailable = mExternalStorageWriteable = true;
+		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+			// We can only read the media
+			mExternalStorageAvailable = true;
+			mExternalStorageWriteable = false;
+			Toast.makeText(this, "Нет прав записи на sdcard",
+					Toast.LENGTH_SHORT).show();
+			finish();
+		} else {
+			// Something else is wrong. It may be one of many other states, but
+			// all we need
+			// to know is we can neither read nor write
+			mExternalStorageAvailable = mExternalStorageWriteable = false;
+			Toast.makeText(this, "Необходимо подключить sdcard.",
+					Toast.LENGTH_SHORT).show();
+			finish();
+		}
+		File folder = new File(Environment.getExternalStorageDirectory()
+				+ "/Light");
+		boolean success = false;
+		if (!folder.exists()) {
+			success = folder.mkdir();
+		}
+		if (!success) {
+			Log.e("FILE", "can't create " + folder);
+		} else {
+			Log.i("FILE", "directory is created");
+		}
 
 	}
 
@@ -142,6 +146,13 @@ public class GioLightUpdActivity extends Activity {
 		Upd = prefs.getBoolean("updkey", false);
 		Test = prefs.getBoolean("testkey", false);
 		Down = prefs.getBoolean("downloadkey", false);
+		Sync = prefs.getBoolean("synckey", false);
+
+		if (Sync == false) {
+			stopService(new Intent(this, ServiceExample.class));
+		} else {
+			startService(new Intent(this, ServiceExample.class));
+		}
 
 		Button button5 = (Button) findViewById(R.id.button5);
 		button5.setEnabled(false);
@@ -165,7 +176,7 @@ public class GioLightUpdActivity extends Activity {
 				button5.setEnabled(false);
 			}
 		}
-		
+
 		if (Down == false) {
 			// Disable text, show button
 			TextView tv3 = (TextView) findViewById(R.id.textView3);
@@ -280,7 +291,7 @@ public class GioLightUpdActivity extends Activity {
 			tv1.setText("Стабильная версия: " + str1);
 			glvn = str1;
 			NewRom();
-			tv3.setText(furlt);	
+			tv3.setText(furlt);
 		} else {
 			furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
 			String cleanstr2 = furl.substring(38, 70);
@@ -448,14 +459,13 @@ public class GioLightUpdActivity extends Activity {
 
 	// Notifications, nothing if Equals, notify if New, else Nothing
 	private void NewRom() {
-			if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
+		if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
+		} else {
+			if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn.trim())) {
+				NewRomNotification();
 			} else {
-				if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn
-						.trim())) {
-					NewRomNotification();
-				} else {
-				}
 			}
+		}
 	}
 
 	private void NewRomNotification() {
@@ -495,7 +505,7 @@ public class GioLightUpdActivity extends Activity {
 		final int HELLO_ID = 2;
 		mNotificationManager.notify(HELLO_ID, notification);
 	}
-	
+
 	// Don't close application
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
