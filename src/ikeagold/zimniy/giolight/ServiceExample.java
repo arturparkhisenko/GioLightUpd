@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class ServiceExample extends Service {
 
-	// DEV
+	// DEV ЗДЕСЬ ДОБАВИТЬ иф проверка конфига какая версия такой сервис и запускать
 	public boolean Sync;
 	public int Time;
 	SharedPreferences prefs;

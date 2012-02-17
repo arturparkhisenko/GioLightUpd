@@ -37,10 +37,9 @@ public class RepeatingAlarmService extends BroadcastReceiver {
 		} catch (java.io.IOException e) {
 		}
 		glvc = cleanstr3;
-		
-		
 		glvn = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
 		NewRom();
+		
 		
 		Log.v(this.getClass().getName(),
 				"Timed alarm onReceive() started at time: "
@@ -116,11 +115,8 @@ public class RepeatingAlarmService extends BroadcastReceiver {
 
 		private void NewRomNotification() {
 			
-			PopupWindow	pw = new PopupWindow(
-				       pop, 
-				       240, 
-				       70, 
-				       true);
+			Context context = null;
+			Toast.makeText(context, "It's Service Time!", Toast.LENGTH_LONG).show();
 
 		}
 		
