@@ -293,10 +293,24 @@ public class GioLightUpdActivity extends Activity {
 			NewRom();
 			tv3.setText(furlt);
 		} else {
+			/** Backup
 			furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
 			String cleanstr2 = furl.substring(38, 70);
 			zfn = cleanstr2;
+			*/
+			furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
+			furl=furl.replaceAll("[^\\p{Print}]","");
+			if (furl.trim().equals(""))
+			{
+			String cleanstr2 = furl.substring(38, 70);
+			zfn = cleanstr2;
+			} else 
+			{
+				zfn="NoTestVersion.zip";
+			}
+			
 			str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
+			//if not zero
 			TextView tv2 = (TextView) findViewById(R.id.textView1);
 			tv2.setText("Тестовая версия: " + str2);
 			glvn = str2;
