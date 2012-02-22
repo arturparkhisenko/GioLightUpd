@@ -10,10 +10,10 @@
 		<CheckBoxPreference android:defaultValue="false"
 			android:key="downloadkey" android:title="@string/pref_download_title" />
 		<CheckBoxPreference android:defaultValue="false"
-			android:key="synckey" android:title="@string/pref_sync_title" />
+			android:enabled="false" android:key="synckey" android:title="@string/pref_sync_title" />
 		<EditTextPreference android:defaultValue="1"
-			android:key="timekey" android:numeric="integer" android:summary="Кол-во часов"
-			android:title="Интервал проверки" />
+			android:enabled="false" android:key="timekey" android:numeric="integer"
+			android:summary="Кол-во часов" android:title="Интервал проверки" />
 	</PreferenceCategory>
 
 </PreferenceScreen>

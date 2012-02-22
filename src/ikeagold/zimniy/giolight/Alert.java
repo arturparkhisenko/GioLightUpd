@@ -1,5 +1,6 @@
 package ikeagold.zimniy.giolight;
 
+import ikeagold.zimniy.giolight.R;
 import android.app.Activity;
 import android.os.Bundle;
 

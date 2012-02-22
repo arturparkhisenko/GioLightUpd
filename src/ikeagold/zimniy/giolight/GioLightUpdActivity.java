@@ -1,5 +1,7 @@
 package ikeagold.zimniy.giolight;
 
+import ikeagold.zimniy.giolight.R;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -284,33 +286,24 @@ public class GioLightUpdActivity extends Activity {
 		TextView tv3 = (TextView) findViewById(R.id.textView3);
 		if (Test == false) {
 			furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
+			// furl = furl.replaceAll("[^\\p{Print}]", "");
+			// if not zero. use == or equall
 			String cleanstr1 = furlt.substring(38, 70);
 			zfn = cleanstr1;
 			str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
+			// if not zero. use == or equall
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Стабильная версия: " + str1);
 			glvn = str1;
 			NewRom();
 			tv3.setText(furlt);
 		} else {
-			/** Backup
 			furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
+			// if not zero. use == or equall
 			String cleanstr2 = furl.substring(38, 70);
 			zfn = cleanstr2;
-			*/
-			furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
-			furl=furl.replaceAll("[^\\p{Print}]","");
-			if (furl.trim().equals(""))
-			{
-			String cleanstr2 = furl.substring(38, 70);
-			zfn = cleanstr2;
-			} else 
-			{
-				zfn="NoTestVersion.zip";
-			}
-			
 			str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
-			//if not zero
+			// if not zero. use == or equall
 			TextView tv2 = (TextView) findViewById(R.id.textView1);
 			tv2.setText("Тестовая версия: " + str2);
 			glvn = str2;

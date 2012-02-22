@@ -18,11 +18,12 @@ public class RepeatingAlarmService extends BroadcastReceiver {
 
 	public String glvn;
 	public String glvc;
-	
+
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		//Toast.makeText(context, "It's Service Time!", Toast.LENGTH_LONG).show();
-		
+		// Toast.makeText(context, "It's Service Time!",
+		// Toast.LENGTH_LONG).show();
+
 		String cleanstr3 = "";
 		try {
 			Process ifc = Runtime.getRuntime().exec("getprop ro.light.version");
@@ -38,18 +39,17 @@ public class RepeatingAlarmService extends BroadcastReceiver {
 		if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
 		} else {
 			if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn.trim())) {
-				Toast.makeText(context, "Новая версия есть", Toast.LENGTH_LONG).show();
+				Toast.makeText(context, "Новая версия есть", Toast.LENGTH_LONG)
+						.show();
 			} else {
 			}
 		}
-		
-		
+
 		Log.v(this.getClass().getName(),
 				"Timed alarm onReceive() started at time: "
 						+ new java.sql.Timestamp(System.currentTimeMillis())
 								.toString());
 	}
-	
 
 	private InputStream OpenHttpConnection(String urlString) throws IOException {
 		InputStream in = null;
@@ -104,5 +104,5 @@ public class RepeatingAlarmService extends BroadcastReceiver {
 		}
 		return str;
 	}
-		
+
 }

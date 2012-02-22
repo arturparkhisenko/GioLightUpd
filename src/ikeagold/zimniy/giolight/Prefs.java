@@ -1,5 +1,6 @@
 package ikeagold.zimniy.giolight;
 
+import ikeagold.zimniy.giolight.R;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
