@@ -148,12 +148,12 @@ public class GioLightUpdActivity extends Activity {
 		Upd = prefs.getBoolean("updkey", false);
 		Test = prefs.getBoolean("testkey", false);
 		Down = prefs.getBoolean("downloadkey", false);
-		Sync = prefs.getBoolean("synckey", false);
+		Sync = prefs.getBoolean("prefNotifications", false);
 
 		if (Sync == false) {
-			stopService(new Intent(this, ServiceExample.class));
+			stopService(new Intent(this, UpdateCheckService.class));
 		} else {
-			startService(new Intent(this, ServiceExample.class));
+			startService(new Intent(this, UpdateCheckService.class));
 		}
 
 		Button button5 = (Button) findViewById(R.id.button5);
@@ -288,6 +288,13 @@ public class GioLightUpdActivity extends Activity {
 			furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
 			// furl = furl.replaceAll("[^\\p{Print}]", "");
 			// if not zero. use == or equall
+			
+			if (furlt == null){
+				Toast.makeText(this, "ÕŒÀÀÀ‹",
+						Toast.LENGTH_SHORT).show();
+			}
+
+			
 			String cleanstr1 = furlt.substring(38, 70);
 			zfn = cleanstr1;
 			str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");

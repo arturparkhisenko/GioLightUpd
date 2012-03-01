@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
 	<PreferenceCategory android:title="@string/pref_title">
 		<CheckBoxPreference android:defaultValue="false"
 			android:key="updkey" android:summary="@string/pref_upd_summary"
@@ -10,10 +9,10 @@
 		<CheckBoxPreference android:defaultValue="false"
 			android:key="downloadkey" android:title="@string/pref_download_title" />
 		<CheckBoxPreference android:defaultValue="false"
-			android:enabled="false" android:key="synckey" android:title="@string/pref_sync_title" />
+			android:key="prefNotifications" android:title="@string/pref_sync_title" />
 		<EditTextPreference android:defaultValue="1"
-			android:enabled="false" android:key="timekey" android:numeric="integer"
-			android:summary="Кол-во часов" android:title="Интервал проверки" />
+			android:dependency="prefNotifications" android:key="timekey"
+			android:numeric="integer" android:summary="Кол-во часов"
+			android:title="Интервал проверки" />
 	</PreferenceCategory>
-
 </PreferenceScreen>
