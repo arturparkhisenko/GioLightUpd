@@ -61,7 +61,7 @@ public class GioLightUpdActivity extends Activity {
 	boolean mExternalStorageAvailable;
 	boolean mExternalStorageWriteable;
 
-	SharedPreferences prefs;
+	SharedPreferences preferences;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -144,16 +144,16 @@ public class GioLightUpdActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		Upd = prefs.getBoolean("updkey", false);
-		Test = prefs.getBoolean("testkey", false);
-		Down = prefs.getBoolean("downloadkey", false);
-		Sync = prefs.getBoolean("prefNotifications", false);
+		preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		Upd = preferences.getBoolean("updkey", false);
+		Test = preferences.getBoolean("testkey", false);
+		Down = preferences.getBoolean("downloadkey", false);
+		Sync = preferences.getBoolean("prefNotifications", false);
 
 		if (Sync == false) {
-			stopService(new Intent(this, UpdateCheckService.class));
+			stopService(new Intent(this, UpdateService.class));
 		} else {
-			startService(new Intent(this, UpdateCheckService.class));
+			startService(new Intent(this, UpdateService.class));
 		}
 
 		Button button5 = (Button) findViewById(R.id.button5);
@@ -431,7 +431,7 @@ public class GioLightUpdActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case 1:
-			Intent Prefs = new Intent(this, Prefs.class);
+			Intent Prefs = new Intent(this, Preferences.class);
 			startActivity(Prefs);
 			break;
 		case 2:
