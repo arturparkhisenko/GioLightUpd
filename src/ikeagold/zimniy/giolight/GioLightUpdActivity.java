@@ -286,19 +286,9 @@ public class GioLightUpdActivity extends Activity {
 		TextView tv3 = (TextView) findViewById(R.id.textView3);
 		if (Test == false) {
 			furlt = DownloadText("http://gio-light.googlecode.com/hg/url.txt");
-			// furl = furl.replaceAll("[^\\p{Print}]", "");
-			// if not zero. use == or equall
-			
-			if (furlt == null){
-				Toast.makeText(this, "НОЛЛЛЬ",
-						Toast.LENGTH_SHORT).show();
-			}
-
-			
 			String cleanstr1 = furlt.substring(38, 70);
 			zfn = cleanstr1;
 			str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
-			// if not zero. use == or equall
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
 			tv1.setText("Стабильная версия: " + str1);
 			glvn = str1;
@@ -306,11 +296,9 @@ public class GioLightUpdActivity extends Activity {
 			tv3.setText(furlt);
 		} else {
 			furl = DownloadText("http://gio-light.googlecode.com/hg/url.testing.txt");
-			// if not zero. use == or equall
 			String cleanstr2 = furl.substring(38, 70);
 			zfn = cleanstr2;
 			str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
-			// if not zero. use == or equall
 			TextView tv2 = (TextView) findViewById(R.id.textView1);
 			tv2.setText("Тестовая версия: " + str2);
 			glvn = str2;
