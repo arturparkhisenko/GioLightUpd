@@ -148,7 +148,7 @@ public class GioLightUpdActivity extends Activity {
 		Upd = preferences.getBoolean("updkey", false);
 		Test = preferences.getBoolean("testkey", false);
 		Down = preferences.getBoolean("downloadkey", false);
-		Sync = preferences.getBoolean("prefNotifications", false);
+		Sync = preferences.getBoolean("synckey", false);
 
 		if (Sync == false) {
 			stopService(new Intent(this, UpdateService.class));
