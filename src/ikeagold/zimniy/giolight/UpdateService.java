@@ -67,7 +67,7 @@ public class UpdateService extends Service {
 		return START_REDELIVER_INTENT;
 	}
 
-	// MAIN DEV SECTION
+	// DEV SECTION
 	private void handleCommand() {
 		new Thread() {
 			public void run() {
@@ -86,9 +86,8 @@ public class UpdateService extends Service {
 				if (lastUpdate + (interval * 60 * 60) > System
 						.currentTimeMillis())
 					return;
-				// Checking update
 				try {
-					// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+					// Deep dev start
 
 					if (isInternetOn()) {
 						update();
@@ -96,7 +95,7 @@ public class UpdateService extends Service {
 						// Maybe toast
 					}
 
-					// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+					// Deep dev end
 				} catch (Exception e) {
 					Log.e("WTF",
 							"Exception during handleCommand():\n"
