@@ -16,7 +16,6 @@ import android.util.Log;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -67,7 +66,7 @@ public class UpdateService extends Service {
 		return START_REDELIVER_INTENT;
 	}
 
-	// DEV SECTION
+	// Update Thread
 	private void handleCommand() {
 		new Thread() {
 			public void run() {
@@ -77,7 +76,6 @@ public class UpdateService extends Service {
 				Sync = prefs.getBoolean("synckey", false);
 				if (Sync == false)
 					return;
-				// Prefs
 				long lastUpdate = prefs.getLong("lastUpdateCheck", 0);
 				String sint = prefs.getString("updateInterval", "24");
 				int interval = Integer.parseInt(sint);
@@ -87,15 +85,11 @@ public class UpdateService extends Service {
 						.currentTimeMillis())
 					return;
 				try {
-					// Deep dev start
-
 					if (isInternetOn()) {
 						update();
 					} else {
-						// Maybe toast
+						// Nothing
 					}
-
-					// Deep dev end
 				} catch (Exception e) {
 					Log.e("WTF",
 							"Exception during handleCommand():\n"
@@ -136,7 +130,6 @@ public class UpdateService extends Service {
 		Notification notification = new Notification(icon, contentTitle, when);
 		Context context = getApplicationContext();
 		CharSequence contentText = "Есть обновление ROM";
-		// ON CLICK *.class
 		Intent notificationIntent = new Intent(this, GioLightUpdActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 				notificationIntent, 0);
@@ -195,7 +188,7 @@ public class UpdateService extends Service {
 		char[] inputBuffer = new char[BUFFER_SIZE];
 		try {
 			while ((charRead = isr.read(inputBuffer)) > 0) {
-				// convert the chars to a String
+				// Convert chars 2 String
 				String readString = String
 						.copyValueOf(inputBuffer, 0, charRead);
 				str += readString;

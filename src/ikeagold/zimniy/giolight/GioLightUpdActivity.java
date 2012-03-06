@@ -1,7 +1,6 @@
 package ikeagold.zimniy.giolight;
 
 import ikeagold.zimniy.giolight.R;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,7 +12,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -89,7 +87,7 @@ public class GioLightUpdActivity extends Activity {
 		glv = "\n" + "Установленная версия: " + cleanstr3 + "\n";
 		tv9.setText(glv);
 
-		// off button
+		// Off button
 		Button button5 = (Button) findViewById(R.id.button5);
 		button5.setEnabled(false);
 
@@ -102,7 +100,7 @@ public class GioLightUpdActivity extends Activity {
 			tv1.setText("Тестовая версия: -\n");
 		}
 
-		// Check sd-card and folder, if not exist - create.
+		// Check sd-card and folder, if don't exist - create
 		mExternalStorageAvailable = false;
 		mExternalStorageWriteable = false;
 		String state = Environment.getExternalStorageState();
@@ -118,9 +116,7 @@ public class GioLightUpdActivity extends Activity {
 					Toast.LENGTH_SHORT).show();
 			finish();
 		} else {
-			// Something else is wrong. It may be one of many other states, but
-			// all we need
-			// to know is we can neither read nor write
+			// We need to know is we can neither read nor write
 			mExternalStorageAvailable = mExternalStorageWriteable = false;
 			Toast.makeText(this, "Необходимо подключить sdcard.",
 					Toast.LENGTH_SHORT).show();
@@ -140,7 +136,7 @@ public class GioLightUpdActivity extends Activity {
 
 	}
 
-	// onResume
+	// OnResume
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -231,7 +227,7 @@ public class GioLightUpdActivity extends Activity {
 				URLConnection conexion = url1.openConnection();
 				conexion.connect();
 				int lenghtOfFile = conexion.getContentLength();
-				// download the file
+				// Download the file
 				InputStream input = new BufferedInputStream(url1.openStream());
 				OutputStream output = new FileOutputStream("/sdcard/Light/"
 						+ zfn);
@@ -306,7 +302,7 @@ public class GioLightUpdActivity extends Activity {
 			tv3.setText(furl);
 		}
 
-		// Enable buttons
+		// Enable button
 		Button button5 = (Button) findViewById(R.id.button5);
 		button5.setEnabled(true);
 	}
@@ -361,7 +357,7 @@ public class GioLightUpdActivity extends Activity {
 		char[] inputBuffer = new char[BUFFER_SIZE];
 		try {
 			while ((charRead = isr.read(inputBuffer)) > 0) {
-				// convert the chars to a String
+				// Convert chars 2 String
 				String readString = String
 						.copyValueOf(inputBuffer, 0, charRead);
 				str += readString;
@@ -498,7 +494,6 @@ public class GioLightUpdActivity extends Activity {
 		Notification notification = new Notification(icon, contentTitle, when);
 		Context context = getApplicationContext();
 		CharSequence contentText = "ROM успешно загружен";
-		// ON CLICK *.class
 		Intent notificationIntent = new Intent(this, GioLightUpdActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 				notificationIntent, 0);
