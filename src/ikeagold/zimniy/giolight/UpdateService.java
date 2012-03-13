@@ -39,25 +39,16 @@ public class UpdateService extends Service {
 		if (Sync == false) {
 			// Nothing
 		} else {
-			String sint = prefs.getString("updateInterval", "24");
-			int interval = Integer.parseInt(sint);
 			Intent intent = new Intent(context, UpdateService.class);
 			PendingIntent pending = PendingIntent.getService(context, 0,
 					intent, 0);
 			AlarmManager alarm = (AlarmManager) context
 					.getSystemService(Context.ALARM_SERVICE);
 			alarm.cancel(pending);
-			if (interval > 0) {
-				alarm.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
-						SystemClock.elapsedRealtime() + 5000,
-						AlarmManager.INTERVAL_HOUR, pending);
-			}
+			alarm.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
+					SystemClock.elapsedRealtime() + 5000,
+					AlarmManager.INTERVAL_HOUR, pending);
 		}
-	}
-
-	@Override
-	public void onStart(Intent intent, int startId) {
-		handleCommand();
 	}
 
 	@Override
@@ -79,8 +70,6 @@ public class UpdateService extends Service {
 				long lastUpdate = prefs.getLong("lastUpdateCheck", 0);
 				String sint = prefs.getString("updateInterval", "24");
 				int interval = Integer.parseInt(sint);
-				if (interval == 0)
-					return;
 				if (lastUpdate + (interval * 60 * 60) > System
 						.currentTimeMillis())
 					return;
