@@ -229,7 +229,7 @@ public class GioLightUpdActivity extends Activity {
 				int lenghtOfFile = conexion.getContentLength();
 				// Download the file
 				InputStream input = new BufferedInputStream(url1.openStream());
-				OutputStream output = new FileOutputStream("/sdcard/Light/"
+				OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath()+"/Light/"
 						+ zfn);
 				byte data[] = new byte[1024];
 				long total = 0;
@@ -260,7 +260,7 @@ public class GioLightUpdActivity extends Activity {
 
 	}
 
-	// Download button
+	// Download button	
 	public boolean button5_Click(View v) {
 		if (isInternetOn()) {
 			if (Test == false) {
