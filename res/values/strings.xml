@@ -41,7 +41,9 @@
 		Поддержка TMP для linux-приложений\n
 		Оригинал собран phiexz.\n\n
 		RECOVERY:\n\n
-		ClockWorkMod recovery 5.0.2.6 модифицированное phiexz (поддержка ext4 на всех разделах) and ZimniY (корректировка fstab: опции монтирования разделов)\n
+		PX recovery 0.3.0 beta (на основе CWM, by phiexz)
+		\n\n
+		До 47й версии - ClockWorkMod recovery 5.0.2.6 (ext4 на всех разделах) and ZimniY (корректировка fstab: опции монтирования разделов)\n
 		Оригинал собран hyriand из исходников ClockWorkMod.\n\n
 		ROM:\n\n
 		Root (Superuser 3 с новым интерфейсом)\n
