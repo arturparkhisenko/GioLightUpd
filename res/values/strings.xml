@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    
     <string name="app_name">GioLightUpd</string>
     <string name="vote">Отзыв</string>
     <string name="about">Инфо</string>
@@ -70,5 +70,5 @@
 		CWM\n
 		SIM ToolKit (зависит от оператора)\n
 		Superuser\n	</string>
-
+	
 </resources>

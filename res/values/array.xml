@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+
 	<string-array name="updateIntervalNames">
 		<item>Каждый час</item>
 		<item>Каждые 4 часа</item>
@@ -12,4 +13,5 @@
 		<item>12</item>
 		<item>24</item>
 	</string-array>
+
 </resources>

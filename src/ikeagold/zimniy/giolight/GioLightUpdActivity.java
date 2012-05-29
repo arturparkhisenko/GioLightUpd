@@ -48,6 +48,7 @@ public class GioLightUpdActivity extends Activity {
 	public String glv;
 	public String glvc;
 	public String glvn;
+	public String glvz;
 	public boolean Test;
 	public boolean Upd;
 	public boolean Down;
@@ -229,7 +230,9 @@ public class GioLightUpdActivity extends Activity {
 				int lenghtOfFile = conexion.getContentLength();
 				// Download the file
 				InputStream input = new BufferedInputStream(url1.openStream());
-				OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath()+"/Light/"
+				OutputStream output = new FileOutputStream(Environment
+						.getExternalStorageDirectory().getPath()
+						+ "/Light/"
 						+ zfn);
 				byte data[] = new byte[1024];
 				long total = 0;
@@ -260,7 +263,7 @@ public class GioLightUpdActivity extends Activity {
 
 	}
 
-	// Download button	
+	// Download button
 	public boolean button5_Click(View v) {
 		if (isInternetOn()) {
 			if (Test == false) {
@@ -457,11 +460,20 @@ public class GioLightUpdActivity extends Activity {
 
 	// Notifications, nothing if Equals, notify if New, else Nothing
 	private void NewRom() {
-		if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
+		glvz = "";
+		if (glvc.trim().equalsIgnoreCase(glvz.trim())) {
+			// Notification, about another rom
+			Toast.makeText(this, "Прошейте GioLight ROM, \n см. инструкцию :)",
+					Toast.LENGTH_SHORT).show();
 		} else {
-			if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn.trim())) {
-				NewRomNotification();
+			// Check update if glvc not null in stock rom or etc
+			if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
 			} else {
+				if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn
+						.trim())) {
+					NewRomNotification();
+				} else {
+				}
 			}
 		}
 	}
