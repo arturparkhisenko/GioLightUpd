@@ -135,7 +135,7 @@ public class UpdateService extends Service {
 			glvz = "";
 			if (glvc.trim().equalsIgnoreCase(glvz.trim())) {
 				// Notification, about another rom
-				Toast.makeText(this, "Прошейте GioLight ROM, \n см. инструкцию :)",
+				Toast.makeText(this, "Прошейте GioLight ROM,\nсм. инструкцию :)",
 						Toast.LENGTH_SHORT).show();
 			} else {
 				// Check update if glvc not null in stock rom or etc
