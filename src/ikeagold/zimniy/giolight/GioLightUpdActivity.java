@@ -202,7 +202,7 @@ public class GioLightUpdActivity extends Activity {
 		switch (id) {
 		case DIALOG_DOWNLOAD_PROGRESS:
 			mProgressDialog = new ProgressDialog(this);
-			mProgressDialog.setMessage("Качает в /sd-card/Light/...");
+			mProgressDialog.setMessage("Качает в /sdcard/Light/...");
 			mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			mProgressDialog.setCancelable(false);
 			mProgressDialog.show();
