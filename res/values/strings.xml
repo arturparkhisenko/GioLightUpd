@@ -41,14 +41,12 @@
 		Поддержка TMP для linux-приложений\n
 		Оригинал собран phiexz.\n\n
 		RECOVERY:\n\n
-		PX recovery 0.3.0 beta (на основе CWM, by phiexz)
+		PX recovery 0.3.6 beta (на основе CWM, by phiexz)
 		\n\n
-		До 47й версии - ClockWorkMod recovery 5.0.2.6 (ext4 на всех разделах) and ZimniY (корректировка fstab: опции монтирования разделов)\n
-		Оригинал собран hyriand из исходников ClockWorkMod.\n\n
 		ROM:\n\n
-		Root (Superuser 3 с новым интерфейсом)\n
-		bash вместо sh (линуксоиды поймут)\n
-		busybox (с нужными симлинками)\n
+		Root (Superuser 3.X)\n
+		busybox\n
+		bash вместо sh\n
 		Поддержка TERMINFO для linux-приложений\n
 		CWM для удобного накатывания обновлений и работы с recovery\n\n
 		Удалены бесполезные программы: DualClock, Forest, etc\n\n
