@@ -13,6 +13,7 @@ import android.app.NotificationManager;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.Toast;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
@@ -26,6 +27,7 @@ import java.net.URLConnection;
 public class UpdateService extends Service {
 
 	public String glvc;
+	public String glvz;
 	public String glvn;
 	public String str1;
 	public String str2;
@@ -110,7 +112,6 @@ public class UpdateService extends Service {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	private void NewRomNotification() {
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
@@ -129,15 +130,25 @@ public class UpdateService extends Service {
 		mNotificationManager.notify(HELLO_ID, notification);
 	}
 
-	private void NewRom() {
-		if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
-		} else {
-			if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn.trim())) {
-				NewRomNotification();
+	// Notifications, nothing if Equals, notify if New, else Nothing
+		private void NewRom() {
+			glvz = "";
+			if (glvc.trim().equalsIgnoreCase(glvz.trim())) {
+				// Notification, about another rom
+				Toast.makeText(this, "Прошейте GioLight ROM,\nсм. инструкцию :)",
+						Toast.LENGTH_SHORT).show();
 			} else {
+				// Check update if glvc not null in stock rom or etc
+				if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
+				} else {
+					if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn
+							.trim())) {
+						NewRomNotification();
+					} else {
+					}
+				}
 			}
 		}
-	}
 
 	private InputStream OpenHttpConnection(String urlString) throws IOException {
 		InputStream in = null;
@@ -168,6 +179,7 @@ public class UpdateService extends Service {
 		try {
 			in = OpenHttpConnection(URL);
 		} catch (IOException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			return "";
 		}
@@ -185,6 +197,7 @@ public class UpdateService extends Service {
 			}
 			in.close();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "";
 		}
