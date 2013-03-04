@@ -48,7 +48,6 @@ public class GioLightUpdActivity extends Activity {
 	public String glv;
 	public String glvc;
 	public String glvn;
-	public String glvz;
 	public boolean Test;
 	public boolean Upd;
 	public boolean Down;
@@ -62,7 +61,6 @@ public class GioLightUpdActivity extends Activity {
 
 	SharedPreferences preferences;
 
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -202,7 +200,7 @@ public class GioLightUpdActivity extends Activity {
 		switch (id) {
 		case DIALOG_DOWNLOAD_PROGRESS:
 			mProgressDialog = new ProgressDialog(this);
-			mProgressDialog.setMessage("Качает в /sdcard/Light/...");
+			mProgressDialog.setMessage("Качает в /sd-card/Light/...");
 			mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			mProgressDialog.setCancelable(false);
 			mProgressDialog.show();
@@ -214,6 +212,7 @@ public class GioLightUpdActivity extends Activity {
 
 	private class DownloadFile extends AsyncTask<String, String, String> {
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -256,6 +255,7 @@ public class GioLightUpdActivity extends Activity {
 			mProgressDialog.setProgress(Integer.parseInt(progress[0]));
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void onPostExecute(String unused) {
 			dismissDialog(DIALOG_DOWNLOAD_PROGRESS);
@@ -350,7 +350,6 @@ public class GioLightUpdActivity extends Activity {
 		try {
 			in = OpenHttpConnection(URL);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			return "";
 		}
@@ -368,7 +367,6 @@ public class GioLightUpdActivity extends Activity {
 			}
 			in.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "";
 		}
@@ -412,6 +410,7 @@ public class GioLightUpdActivity extends Activity {
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void AboutDialog() {
 		AlertDialog aboutDialog = new AlertDialog.Builder(this).create();
 		aboutDialog.setTitle(R.string.about);
@@ -460,24 +459,16 @@ public class GioLightUpdActivity extends Activity {
 
 	// Notifications, nothing if Equals, notify if New, else Nothing
 	private void NewRom() {
-		glvz = "";
-		if (glvc.trim().equalsIgnoreCase(glvz.trim())) {
-			// Notification, about another rom
-			Toast.makeText(this, "Прошейте GioLight ROM,\nсм. инструкцию :)",
-					Toast.LENGTH_SHORT).show();
+		if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
 		} else {
-			// Check update if glvc not null in stock rom or etc
-			if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
+			if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn.trim())) {
+				NewRomNotification();
 			} else {
-				if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn
-						.trim())) {
-					NewRomNotification();
-				} else {
-				}
 			}
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void NewRomNotification() {
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
@@ -497,6 +488,7 @@ public class GioLightUpdActivity extends Activity {
 		mNotificationManager.notify(HELLO_ID, notification);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void DownloadRomNotification() {
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
