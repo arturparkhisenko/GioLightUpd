@@ -112,6 +112,7 @@ public class UpdateService extends Service {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void NewRomNotification() {
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
@@ -131,24 +132,24 @@ public class UpdateService extends Service {
 	}
 
 	// Notifications, nothing if Equals, notify if New, else Nothing
-		private void NewRom() {
-			glvz = "";
-			if (glvc.trim().equalsIgnoreCase(glvz.trim())) {
-				// Notification, about another rom
-				Toast.makeText(this, "Прошейте GioLight ROM,\nсм. инструкцию :)",
-						Toast.LENGTH_SHORT).show();
+	private void NewRom() {
+		glvz = "";
+		if (glvc.trim().equalsIgnoreCase(glvz.trim())) {
+			// Notification, about another rom
+			Toast.makeText(this, "Прошейте GioLight ROM,\nсм. инструкцию :)",
+					Toast.LENGTH_SHORT).show();
+		} else {
+			// Check update if glvc not null in stock rom or etc
+			if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
 			} else {
-				// Check update if glvc not null in stock rom or etc
-				if (glvc.trim().equalsIgnoreCase(glvn.trim())) {
+				if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn
+						.trim())) {
+					NewRomNotification();
 				} else {
-					if (Integer.parseInt(glvc.trim()) < Integer.parseInt(glvn
-							.trim())) {
-						NewRomNotification();
-					} else {
-					}
 				}
 			}
 		}
+	}
 
 	private InputStream OpenHttpConnection(String urlString) throws IOException {
 		InputStream in = null;
@@ -179,7 +180,6 @@ public class UpdateService extends Service {
 		try {
 			in = OpenHttpConnection(URL);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			return "";
 		}
@@ -197,7 +197,6 @@ public class UpdateService extends Service {
 			}
 			in.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "";
 		}

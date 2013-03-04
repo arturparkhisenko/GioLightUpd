@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <string name="app_name">GioLightUpd</string>
     <string name="vote">Отзыв</string>
     <string name="about">Инфо</string>
@@ -22,11 +22,11 @@
     <string name="pref_download_title">Внешняя загрузка</string>
     <string name="pref_sync_title">Фоновые обновления</string>
     <string name="alert_text">Важно:\n\n
-		- Без CWM (минимально 2.3 Android) данную прошивку использовать нельзя.\n\n
+		- Без CWM (минимум 2.3 Android) данную прошивку использовать нельзя.\n\n
 		- Файловая система по-умолчанию ext4 - переход на другую прошивку возможен только после многофайловой прошивки через Odin. http://goo.gl/Xktpz \n\n
 		- *zip архивы прошивок размером ~95мб.\n\n\n
 		Сайт: http://goo.gl/qWS5m\n\n
-		Сообщить о баге: http://code.google.com/p/gio-light/issues/list\n	</string>
+		Сообщить о баге: http://code.google.com/p/gio-light/issues/list	</string>
     <string name="install_text">Порядок установки:\n\n
 		Для корректной установки и работы ROM необходимо скачать и прошить CWM http://goo.gl/nqh5W , либо - поставить ROM 2 раза подряд - если у Вас стоковая прошивка без CWM (когда установщик в первый раз прошьёт часть файлов - boot.img и recovery.img и ругнётся на невозможность дальнейшей установки - ещё раз перезагрузиться в рекавери и повторить процесс)\n\n
 		Снимаем полный бэкап в CWM, чтобы (если вдруг захочется) откатиться обратно\n\n
@@ -37,6 +37,7 @@
 		ROM обрабатывает найденные на карте в папке gio4pda пакеты http://goo.gl/ljSZk , и перезагружается для их установки (при отсутствии пакетов - перезагрузитесь вручную).	</string>
     <string name="info_text">Особенности данной прошивки:\n\n
 		BOOT:\n\n
+		px-kernel - последний для Gio\n
 		Разгон (122-1035 МГц) - 787 по-умолчанию\n
 		Поддержка init-скриптов + патчи для производительности\n
 		Поддержка TMP для linux-приложений\n
@@ -45,11 +46,12 @@
 		PX recovery 0.3.6 beta (на основе CWM, by phiexz)
 		\n\n
 		ROM:\n\n
-		Root (Superuser 3.X)\n
+		Root (Superuser)\n
 		busybox\n
 		bash вместо sh\n
 		Поддержка TERMINFO для linux-приложений\n
-		CWM для удобного накатывания обновлений и работы с recovery\n\n
+		CWM для удобного накатывания обновлений и работы с recovery\n
+		патчи для производительности\n\n
 		Удалены бесполезные программы: DualClock, Forest, etc\n\n
 		Оставшиеся пункты меню:\n\n
 		Календарь\n
@@ -69,5 +71,5 @@
 		CWM\n
 		SIM ToolKit (зависит от оператора)\n
 		Superuser\n	</string>
-	
+
 </resources>

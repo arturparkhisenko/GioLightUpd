@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-	<PreferenceCategory android:title="@string/pref_title">
-		<CheckBoxPreference android:defaultValue="false"
-			android:key="updkey" android:summary="@string/pref_upd_summary"
-			android:title="@string/pref_upd_title" />
-		<CheckBoxPreference android:defaultValue="false"
-			android:key="testkey" android:title="@string/pref_test_title" />
-		<CheckBoxPreference android:defaultValue="false"
-			android:key="downloadkey" android:title="@string/pref_download_title" />
-		<CheckBoxPreference android:defaultValue="false"
-			android:key="synckey" android:title="@string/pref_sync_title" />
-		<ListPreference android:defaultValue="24"
-			android:dependency="synckey" android:entries="@array/updateIntervalNames"
-			android:entryValues="@array/updateIntervalValues" android:key="updateInterval"
-			android:title="Интервал проверки" />
-	</PreferenceCategory>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/pref_title" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="updkey"
+            android:summary="@string/pref_upd_summary"
+            android:title="@string/pref_upd_title" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="testkey"
+            android:title="@string/pref_test_title" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="downloadkey"
+            android:title="@string/pref_download_title" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="synckey"
+            android:title="@string/pref_sync_title" />
+
+        <ListPreference
+            android:defaultValue="24"
+            android:dependency="synckey"
+            android:entries="@array/updateIntervalNames"
+            android:entryValues="@array/updateIntervalValues"
+            android:key="updateInterval"
+            android:title="Интервал проверки" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
