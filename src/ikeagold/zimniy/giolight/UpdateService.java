@@ -121,7 +121,7 @@ public class UpdateService extends Service {
 		long when = System.currentTimeMillis();
 		Notification notification = new Notification(icon, contentTitle, when);
 		Context context = getApplicationContext();
-		CharSequence contentText = "Есть обновление ROM";
+		CharSequence contentText = "Р•СЃС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ ROM";
 		Intent notificationIntent = new Intent(this, GioLightUpdActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 				notificationIntent, 0);
@@ -136,7 +136,7 @@ public class UpdateService extends Service {
 		glvz = "";
 		if (glvc.trim().equalsIgnoreCase(glvz.trim())) {
 			// Notification, about another rom
-			Toast.makeText(this, "Прошейте GioLight ROM,\nсм. инструкцию :)",
+			Toast.makeText(this, "РџСЂРѕС€РµР№С‚Рµ GioLight ROM,\nСЃРј. РёРЅСЃС‚СЂСѓРєС†РёСЋ :)",
 					Toast.LENGTH_SHORT).show();
 		} else {
 			// Check update if glvc not null in stock rom or etc

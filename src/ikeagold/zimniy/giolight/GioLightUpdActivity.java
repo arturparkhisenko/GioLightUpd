@@ -84,7 +84,7 @@ public class GioLightUpdActivity extends Activity {
 		} catch (java.io.IOException e) {
 		}
 		glvc = cleanstr3;
-		glv = "\n" + "Установленная версия: " + cleanstr3 + "\n";
+		glv = "\n" + "РЈСЃС‚Р°РЅРѕРІР»РµРЅРЅР°СЏ РІРµСЂСЃРёСЏ: " + cleanstr3 + "\n";
 		tv9.setText(glv);
 
 		// Off button
@@ -94,10 +94,10 @@ public class GioLightUpdActivity extends Activity {
 		// Load saved caption
 		if (Test == false) {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Стабильная версия: -\n");
+			tv1.setText("РЎС‚Р°Р±РёР»СЊРЅР°СЏ РІРµСЂСЃРёСЏ: -\n");
 		} else {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Тестовая версия: -\n");
+			tv1.setText("РўРµСЃС‚РѕРІР°СЏ РІРµСЂСЃРёСЏ: -\n");
 		}
 
 		// Check sd-card and folder, if don't exist - create
@@ -112,13 +112,13 @@ public class GioLightUpdActivity extends Activity {
 			// We can only read the media
 			mExternalStorageAvailable = true;
 			mExternalStorageWriteable = false;
-			Toast.makeText(this, "Нет прав записи на sdcard",
+			Toast.makeText(this, "РќРµС‚ РїСЂР°РІ Р·Р°РїРёСЃРё РЅР° sdcard",
 					Toast.LENGTH_SHORT).show();
 			finish();
 		} else {
 			// We need to know is we can neither read nor write
 			mExternalStorageAvailable = mExternalStorageWriteable = false;
-			Toast.makeText(this, "Необходимо подключить sdcard.",
+			Toast.makeText(this, "РќРµРѕР±С…РѕРґРёРјРѕ РїРѕРґРєР»СЋС‡РёС‚СЊ sdcard.",
 					Toast.LENGTH_SHORT).show();
 			finish();
 		}
@@ -157,10 +157,10 @@ public class GioLightUpdActivity extends Activity {
 
 		if (Test == false) {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Стабильная версия: " + str1);
+			tv1.setText("РЎС‚Р°Р±РёР»СЊРЅР°СЏ РІРµСЂСЃРёСЏ: " + str1);
 		} else {
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Тестовая версия: " + str2);
+			tv1.setText("РўРµСЃС‚РѕРІР°СЏ РІРµСЂСЃРёСЏ: " + str2);
 		}
 
 		if (Upd == false) {
@@ -168,7 +168,7 @@ public class GioLightUpdActivity extends Activity {
 			if (isInternetOn()) {
 				update();
 			} else {
-				Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT)
+				Toast.makeText(this, "РРЅС‚РµСЂРЅРµС‚Р° РЅРµС‚ :(", Toast.LENGTH_SHORT)
 						.show();
 				button5 = (Button) findViewById(R.id.button5);
 				button5.setEnabled(false);
@@ -201,7 +201,7 @@ public class GioLightUpdActivity extends Activity {
 		switch (id) {
 		case DIALOG_DOWNLOAD_PROGRESS:
 			mProgressDialog = new ProgressDialog(this);
-			mProgressDialog.setMessage("Качает в /sdcard/Light/...");
+			mProgressDialog.setMessage("РљР°С‡Р°РµС‚ РІ /sdcard/Light/...");
 			mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			mProgressDialog.setCancelable(false);
 			mProgressDialog.show();
@@ -276,7 +276,7 @@ public class GioLightUpdActivity extends Activity {
 			}
 			return true;
 		} else {
-			Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "РРЅС‚РµСЂРЅРµС‚Р° РЅРµС‚ :(", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 	}
@@ -290,7 +290,7 @@ public class GioLightUpdActivity extends Activity {
 			zfn = cleanstr1;
 			str1 = DownloadText("http://gio-light.googlecode.com/hg/version.txt");
 			TextView tv1 = (TextView) findViewById(R.id.textView1);
-			tv1.setText("Стабильная версия: " + str1);
+			tv1.setText("РЎС‚Р°Р±РёР»СЊРЅР°СЏ РІРµСЂСЃРёСЏ: " + str1);
 			glvn = str1;
 			NewRom();
 			tv3.setText(furlt);
@@ -300,7 +300,7 @@ public class GioLightUpdActivity extends Activity {
 			zfn = cleanstr2;
 			str2 = DownloadText("http://gio-light.googlecode.com/hg/version.testing.txt");
 			TextView tv2 = (TextView) findViewById(R.id.textView1);
-			tv2.setText("Тестовая версия: " + str2);
+			tv2.setText("РўРµСЃС‚РѕРІР°СЏ РІРµСЂСЃРёСЏ: " + str2);
 			glvn = str2;
 			NewRom();
 			tv3.setText(furl);
@@ -317,7 +317,7 @@ public class GioLightUpdActivity extends Activity {
 			update();
 			return true;
 		} else {
-			Toast.makeText(this, "Интернета нет :(", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "РРЅС‚РµСЂРЅРµС‚Р° РЅРµС‚ :(", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 	}
@@ -463,7 +463,7 @@ public class GioLightUpdActivity extends Activity {
 		glvz = "";
 		if (glvc.trim().equalsIgnoreCase(glvz.trim())) {
 			// Notification, about another rom
-			Toast.makeText(this, "Прошейте GioLight ROM,\nсм. инструкцию :)",
+			Toast.makeText(this, "РџСЂРѕС€РµР№С‚Рµ GioLight ROM,\nСЃРј. РёРЅСЃС‚СЂСѓРєС†РёСЋ :)",
 					Toast.LENGTH_SHORT).show();
 		} else {
 			// Check update if glvc not null in stock rom or etc
@@ -487,7 +487,7 @@ public class GioLightUpdActivity extends Activity {
 		long when = System.currentTimeMillis();
 		Notification notification = new Notification(icon, contentTitle, when);
 		Context context = getApplicationContext();
-		CharSequence contentText = "Есть обновление ROM";
+		CharSequence contentText = "Р•СЃС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ ROM";
 		// ON CLICK *.class
 		Intent notificationIntent = new Intent(this, GioLightUpdActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
@@ -507,7 +507,7 @@ public class GioLightUpdActivity extends Activity {
 		long when = System.currentTimeMillis();
 		Notification notification = new Notification(icon, contentTitle, when);
 		Context context = getApplicationContext();
-		CharSequence contentText = "ROM успешно загружен";
+		CharSequence contentText = "ROM СѓСЃРїРµС€РЅРѕ Р·Р°РіСЂСѓР¶РµРЅ";
 		Intent notificationIntent = new Intent(this, GioLightUpdActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 				notificationIntent, 0);
